@@ -6,13 +6,13 @@
     <data>
         <variable
             name="fragment"
-            type="com.tao.wnc.ReadPostFragment" />
+            type="com.tao.wnc.view.ReadPostFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".view.MainActivity">
 
         <EditText
             android:id="@+id/read_post_password"

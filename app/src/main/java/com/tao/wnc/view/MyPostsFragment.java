@@ -1,4 +1,4 @@
-package com.tao.wnc;
+package com.tao.wnc.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,17 +9,22 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.tao.wnc.databinding.FragmentListBinding;
+import com.tao.wnc.R;
+import com.tao.wnc.databinding.FragmentMyPostsBinding;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link MyPostsFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class MyPostsFragment extends Fragment {
 
-public class ListFragment extends Fragment {
-
-    public ListFragment() {
+    public MyPostsFragment() {
         // Required empty public constructor
     }
 
-    public static ListFragment newInstance() {
-        return new ListFragment();
+    public static MyPostsFragment newInstance() {
+        return new MyPostsFragment();
     }
 
     @Override
@@ -30,24 +35,18 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false);
+        FragmentMyPostsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_posts, container, false);
         binding.setFragment(this);
 
         return binding.getRoot();
     }
 
-    public void onMyPostsClick(View v){
-        ((MainActivity)getActivity()).replaceWithBackStack(MyPostsFragment.newInstance());
+    public void onUndoClick(View v){
+        ((MainActivity)getActivity()).removeAndPop(this);
     }
-    public void onAddPostClick(View v){
-        ((MainActivity)getActivity()).replaceWithBackStack(AddPostFragment.newInstance());
-    }
+
     public void onReadPostClick(View v){
         ((MainActivity)getActivity()).replaceWithBackStack(ReadPostFragment.newInstance());
     }
-    public void onNotificationsClick(View v){
-        ((MainActivity)getActivity()).replaceWithBackStack(NotificationsFragment.newInstance());
-    }
-
 
 }
