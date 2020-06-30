@@ -1,14 +1,15 @@
 <resources>
     <string name="app_name">wnc</string>
+
+    <string name="ime_next">다음</string>
+    <string name="ime_done">완료</string>
+    <string name="ime_send">전송</string>
+
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_logo">고민,\n그리고\n선택</string>
+    <string name="login_edt_email_hint">이메일</string>
+    <string name="login_edt_password_hint">비밀번호</string>
+    <string name="login_btn_login">로그인</string>
+    <string name="login_tv_guide_register">처음 오셨나요?</string>
+    <string name="login_tv_register">회원가입</string>
 </resources>
