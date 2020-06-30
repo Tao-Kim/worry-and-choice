@@ -31,7 +31,7 @@
                 android:src="@drawable/ib_back_default"
                 android:focusable="true"
                 android:clickable="true"
-                android:background="?android:selectableItemBackground"
+                android:background="?android:selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
