@@ -38,7 +38,7 @@ public class RegisterFragment extends Fragment {
         return binding.getRoot();
     }
 
-    public void onUndoClick(View v) {
+    public void onBackClick(View v) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction().remove(this).commit();
         fragmentManager.popBackStack();
