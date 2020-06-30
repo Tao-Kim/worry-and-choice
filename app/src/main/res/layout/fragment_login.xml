@@ -98,6 +98,7 @@
                     android:layout_marginRight="52dp"
                     android:onClick="@{fragment::onLoginClick}"
                     android:text="@string/login_btn_login"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:textColor="@color/wncWhite"
                     app:layout_constraintBottom_toBottomOf="parent"

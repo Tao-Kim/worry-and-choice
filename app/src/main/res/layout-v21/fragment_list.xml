@@ -46,7 +46,7 @@
                 app:srcCompat="@drawable/ic_add"
                 android:focusable="true"
                 android:clickable="true"
-                android:background="?android:selectableItemBackground"
+                android:background="?android:selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +62,7 @@
                 app:srcCompat="@drawable/ic_person"
                 android:focusable="true"
                 android:clickable="true"
-                android:background="?android:selectableItemBackground"
+                android:background="?android:selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/ib_list_add"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -75,7 +75,7 @@
                 app:srcCompat="@drawable/ic_notifications"
                 android:focusable="true"
                 android:clickable="true"
-                android:background="?android:selectableItemBackground"
+                android:background="?android:selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/ib_list_my"
                 app:layout_constraintTop_toTopOf="parent" />
