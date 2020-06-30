@@ -1,4 +1,4 @@
-package com.tao.wnc;
+package com.tao.wnc.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.tao.wnc.R;
 
 public class LoginActivity extends AppCompatActivity {
     static {

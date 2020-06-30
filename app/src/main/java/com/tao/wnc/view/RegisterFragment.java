@@ -1,4 +1,4 @@
-package com.tao.wnc;
+package com.tao.wnc.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentRegisterBinding;
 
 public class RegisterFragment extends Fragment {

@@ -1,4 +1,4 @@
-package com.tao.wnc;
+package com.tao.wnc.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentLoginBinding;
 
 /**
