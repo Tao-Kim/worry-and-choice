@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,16 +44,28 @@ public class ListFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false);
         binding.setFragment(this);
 
-        viewModel = new ListViewModel();
-
         RecyclerView recyclerView = binding.rvList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
         adapter = new PostListAdapter();
         recyclerView.setAdapter(adapter);
 
-        getList();
-
         return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        getList();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        adapter = null;
+        viewModel = null;
     }
 
     private void getList(){
