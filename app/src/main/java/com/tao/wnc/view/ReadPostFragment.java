@@ -41,7 +41,11 @@ public class ReadPostFragment extends Fragment {
         return binding.getRoot();
     }
 
-    public void onUndoClick(View v) {
+    public void onBackClick(View v) {
         ((MainActivity) getActivity()).removeAndPop(this);
+    }
+
+    public void onRefreshClick(View v) {
+
     }
 }
