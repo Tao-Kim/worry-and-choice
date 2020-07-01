@@ -23,4 +23,7 @@
 
     <!-- Strings related to list -->
     <string name="list_title">선택이 필요해요</string>
+
+    <!-- Strings related to my posts -->
+    <string name="my_posts_title">나의 고민이에요</string>
 </resources>
