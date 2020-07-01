@@ -89,7 +89,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/container_list_nav"/>
+            app:layout_constraintTop_toBottomOf="@id/container_list_nav"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbVertical="@color/wnc28Orange"/>
 
 
 
