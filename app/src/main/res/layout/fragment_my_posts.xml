@@ -12,7 +12,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_main"
         tools:context=".view.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +34,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_arrow_back2" />
+                app:srcCompat="@drawable/ic_arrow_back" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +59,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_refresh2" />
+                app:srcCompat="@drawable/ic_refresh" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -73,7 +72,8 @@
             android:scrollbars="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/container_my_posts_nav"/>
+            app:layout_constraintTop_toBottomOf="@id/container_my_posts_nav"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 
