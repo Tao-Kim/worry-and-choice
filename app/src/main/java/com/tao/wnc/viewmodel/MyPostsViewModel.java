@@ -3,26 +3,26 @@ package com.tao.wnc.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
-import com.tao.wnc.model.ListItem;
+import com.tao.wnc.model.PostItem;
 
 import java.util.ArrayList;
 
 public class MyPostsViewModel extends ViewModel {
-    private ArrayList<ListItem> items;
+    private ArrayList<PostItem> items;
 
     public MyPostsViewModel() {
         items = new ArrayList<>();
         setTestDataSet();
     }
 
-    public ArrayList<ListItem> getListItems() {
+    public ArrayList<PostItem> getListItems() {
 
         return items;
     }
 
     private void setTestDataSet() {
 
-        ListItem item2 = new ListItem("고민이에요",
+        PostItem item2 = new PostItem("고민이에요",
                 "신발을 사려는데 무슨색을 살까요?",
                 "50분전 | 타오",
                 false,
@@ -30,7 +30,7 @@ public class MyPostsViewModel extends ViewModel {
                 0);
         items.add(item2);
 
-        ListItem item4 = new ListItem("TEST",
+        PostItem item4 = new PostItem("TEST",
                 "teset",
                 "0시간전 | 타오",
                 true,

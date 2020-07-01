@@ -1,7 +1,6 @@
 package com.tao.wnc.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tao.wnc.R;
 import com.tao.wnc.adapter.PostListAdapter;
 import com.tao.wnc.databinding.FragmentListBinding;
+import com.tao.wnc.model.PostItem;
 import com.tao.wnc.viewmodel.ListViewModel;
 
 
@@ -48,7 +48,13 @@ public class ListFragment extends Fragment {
         RecyclerView recyclerView = binding.rvList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        adapter = new PostListAdapter();
+        adapter = new PostListAdapter(){
+            @Override
+            public void onItemClick(PostItem item, int position) {
+                super.onItemClick(item, position);
+                ((MainActivity) getActivity()).replaceWithBackStack(ReadPostFragment.newInstance());
+            }
+        };
         recyclerView.setAdapter(adapter);
 
         return binding.getRoot();
@@ -64,7 +70,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("listFragment", "onDestory");
         binding = null;
         adapter = null;
         viewModel = null;
@@ -81,10 +86,6 @@ public class ListFragment extends Fragment {
 
     public void onAddPostClick(View v) {
         ((MainActivity) getActivity()).replaceWithBackStack(AddPostFragment.newInstance());
-    }
-
-    public void onReadPostClick(View v) {
-        ((MainActivity) getActivity()).replaceWithBackStack(ReadPostFragment.newInstance());
     }
 
     public void onNotificationsClick(View v) {

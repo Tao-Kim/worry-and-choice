@@ -1,6 +1,6 @@
 package com.tao.wnc.model;
 
-public class ListItem {
+public class PostItem {
     private String title;
     private String description;
     private String others;
@@ -8,7 +8,7 @@ public class ListItem {
     private int checkCounts;
     private int commentCounts;
 
-    public ListItem(String title, String description, String others, boolean selected, int checkCounts, int commentCounts) {
+    public PostItem(String title, String description, String others, boolean selected, int checkCounts, int commentCounts) {
         this.title = title;
         this.description = description;
         this.others = others;
