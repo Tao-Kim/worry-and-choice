@@ -1,6 +1,7 @@
 package com.tao.wnc.viewmodel;
 
 
+
 import androidx.lifecycle.ViewModel;
 
 import com.tao.wnc.model.ListItem;
@@ -8,15 +9,10 @@ import com.tao.wnc.model.ListItem;
 import java.util.ArrayList;
 
 public class ListViewModel extends ViewModel {
-    private ArrayList<ListItem> items;
-
-    public ListViewModel() {
-        items = new ArrayList<>();
-        setTestDataSet();
-    }
+    ArrayList<ListItem> items = new ArrayList<>();
 
     public ArrayList<ListItem> getListItems() {
-
+        setTestDataSet();
         return items;
     }
 
