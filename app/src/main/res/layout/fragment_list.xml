@@ -12,12 +12,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_main"
+        android:background="@drawable/test_list"
         tools:context=".view.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginHorizontal="25dp"
-            android:id="@+id/container_list_nav"
+            android:id="@+id/container_register_nav"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/list_title"
-                android:textStyle="bold"
                 android:textColor="@color/wncWhite"
                 android:textSize="21sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -37,10 +36,8 @@
 
             <ImageButton
                 android:id="@+id/ib_list_add"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:onClick="@{fragment::onAddPostClick}"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_add"
@@ -52,45 +49,107 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/ib_list_my"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:onClick="@{fragment::onMyPostsClick}"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="@{fragment::onAddPostClick}"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_person"
+                app:srcCompat="@drawable/ic_add"
                 android:focusable="true"
                 android:clickable="true"
                 android:background="?android:selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/ib_list_add"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:onClick="@{fragment::onNotificationsClick}"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_notifications"
-                android:focusable="true"
-                android:clickable="true"
-                android:background="?android:selectableItemBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/ib_list_my"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scrollbars="vertical"
-            app:layout_constraintStart_toStartOf="parent"
+        <EditText
+            android:id="@+id/list_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:hint="11"
+            android:imeActionLabel="11"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/container_list_nav"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
 
+        <Button
+            android:id="@+id/btn_list_myposts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="592dp"
+            android:text="내글보기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            android:onClick="@{fragment::onMyPostsClick}"/>
+
+        <Button
+            android:id="@+id/btn_list_addpost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="592dp"
+            android:text="글추가"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            android:onClick="@{fragment::onAddPostClick}" />
+
+        <Button
+            android:id="@+id/btn_list_readpost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="592dp"
+            android:text="글보기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            android:onClick="@{fragment::onReadPostClick}" />
+
+        <Button
+            android:id="@+id/btn_list_notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="504dp"
+            android:text="알림보기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.969"
+            android:onClick="@{fragment::onNotificationsClick}" />
 
 
 
