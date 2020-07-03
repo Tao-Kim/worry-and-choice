@@ -30,6 +30,8 @@
                 android:onClick="@{fragment::onBackClick}"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_arrow_back"
+                android:focusable="true"
+                android:clickable="true"
                 android:background="?android:selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

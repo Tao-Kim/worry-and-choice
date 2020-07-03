@@ -40,11 +40,7 @@ public class AddPostFragment extends Fragment {
         return binding.getRoot();
     }
 
-    public void onBackClick(View v){
+    public void onUndoClick(View v){
         ((MainActivity)getActivity()).removeAndPop(this);
-    }
-
-    public void onDoneClick(View v) {
-
     }
 }

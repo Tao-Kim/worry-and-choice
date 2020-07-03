@@ -62,7 +62,7 @@
                     android:inputType="textEmailAddress"
                     android:selectAllOnFocus="true"
                     android:textColor="@color/wncLightGray"
-                    android:textColorHint="@color/wnc28LightGray"
+                    android:textColorHint="@color/wncLightGray"
                     app:backgroundTint="@color/wncLightGray"
                     app:drawableLeftCompat="@drawable/ic_email"
                     app:drawableStartCompat="@drawable/ic_email"
@@ -84,7 +84,7 @@
                     android:inputType="textPassword"
                     android:selectAllOnFocus="true"
                     android:textColor="@color/wncLightGray"
-                    android:textColorHint="@color/wnc28LightGray"
+                    android:textColorHint="@color/wncLightGray"
                     app:backgroundTint="@color/wncLightGray"
                     app:drawableLeftCompat="@drawable/ic_lock"
                     app:drawableStartCompat="@drawable/ic_lock"
@@ -118,8 +118,7 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btn_login_login"
-                    android:gravity="center">
+                    app:layout_constraintTop_toBottomOf="@id/btn_login_login">
 
                     <TextView
                         android:layout_width="wrap_content"

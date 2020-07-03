@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_main"
         tools:context=".view.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +28,8 @@
                 android:layout_width="31dp"
                 android:layout_height="31dp"
                 android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 android:onClick="@{fragment::onBackClick}"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/read_post_title_dissatisfied"
+                android:text="@string/read_post_title"
                 android:textColor="@color/wncWhite"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -50,6 +53,8 @@
                 android:layout_width="31dp"
                 android:layout_height="31dp"
                 android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 android:onClick="@{fragment::onRefreshClick}"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -98,9 +103,11 @@
 
                     <ImageButton
                         android:id="@+id/ib_read_post_delete"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:background="?android:selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:onClick="@{fragment::onRefreshClick}"
                         android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,10 +116,12 @@
                         app:srcCompat="@drawable/ic_delete" />
 
                     <ImageButton
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_marginHorizontal="7dp"
                         android:background="?android:selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:onClick="@{fragment::onRefreshClick}"
                         android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -157,7 +166,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_read_post_description">
-
 
                     <LinearLayout
                         android:focusable="true"
@@ -234,7 +242,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_check_red" />
+                        app:srcCompat="@drawable/ic_check" />
 
                     <TextView
                         android:id="@+id/tv_read_post_check_counts"
@@ -304,7 +312,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/bg_item45">
+            android:background="@drawable/bg_item60">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="0dp"
@@ -315,16 +323,14 @@
                 android:imeOptions="actionSend"
                 android:inputType="text"
                 android:selectAllOnFocus="true"
-                android:textColor="@color/wncWhite"
-                android:textColorHint="@color/wncLightGray"
+                android:textColor="@color/wncPureBlack"
+                android:textColorHint="@color/wncDeepDarkGray"
                 android:textSize="13sp"
                 android:background="@color/wncNone"
                 app:layout_constraintEnd_toStartOf="@id/tv_read_post_send"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:onClick="@{fragment::onRefreshClick}"/>
-
+                app:layout_constraintBottom_toBottomOf="parent"/>
             <TextView
                 android:id="@+id/tv_read_post_send"
                 android:layout_width="wrap_content"
@@ -333,15 +339,13 @@
                 android:paddingVertical="7dp"
                 android:paddingHorizontal="12dp"
                 android:text="@string/ime_send"
-                android:textColor="@color/wncWhite"
-                android:textSize="14sp"
+                android:textColor="@color/wncPureBlack"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@drawable/bg_item45"
-                android:clickable="true"
-                android:focusable="true"/>
+                android:background="@drawable/bg_item60"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
