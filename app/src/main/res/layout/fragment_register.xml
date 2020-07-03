@@ -12,8 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:background="@drawable/bg_main">
+        tools:context=".MainActivity">
 
         <EditText
             android:id="@+id/reg_username"
@@ -22,7 +21,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="96dp"
             android:layout_marginEnd="24dp"
-            android:hint="11"
+            android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,8 +35,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:hint="11"
-            android:imeActionLabel="11"
+            android:hint="@string/prompt_password"
+            android:imeActionLabel="@string/action_sign_in_short"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:selectAllOnFocus="true"
