@@ -6,11 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
+import com.tao.wnc.adapter.NotificationListAdapter;
 import com.tao.wnc.databinding.FragmentNotificationsBinding;
+import com.tao.wnc.viewmodel.NotificationsViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +24,10 @@ import com.tao.wnc.databinding.FragmentNotificationsBinding;
  * create an instance of this fragment.
  */
 public class NotificationsFragment extends Fragment {
+
+    private FragmentNotificationsBinding binding;
+    private NotificationsViewModel viewModel;
+    private NotificationListAdapter adapter;
 
     public NotificationsFragment() {
         // Required empty public constructor
@@ -37,12 +47,33 @@ public class NotificationsFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentNotificationsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false);
         binding.setFragment(this);
+
+        RecyclerView recyclerView = binding.rvNotifications;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        adapter = new NotificationListAdapter();
+        recyclerView.setAdapter(adapter);
+
         return binding.getRoot();
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
+        getList();
+    }
 
-    public void onUndoClick(View v) {
+    private void getList(){
+        adapter.setItems(viewModel.getListItems());
+    }
+
+    public void onBackClick(View v) {
         ((MainActivity) getActivity()).removeAndPop(this);
+    }
+
+    public void onNotificationClick(View v){
+
     }
 
 }

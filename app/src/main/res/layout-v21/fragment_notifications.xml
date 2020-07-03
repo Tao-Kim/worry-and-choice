@@ -27,7 +27,7 @@
             <ImageButton
                 android:layout_width="31dp"
                 android:layout_height="31dp"
-                android:background="?android:selectableItemBackground"
+                android:background="?android:selectableItemBackgroundBorderless"
                 android:onClick="@{fragment::onBackClick}"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,7 @@
             <ImageButton
                 android:layout_width="31dp"
                 android:layout_height="31dp"
-                android:background="?android:selectableItemBackground"
+                android:background="?android:selectableItemBackgroundBorderless"
                 android:onClick="@{fragment::onNotificationClick}"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -31,7 +31,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/wncNone">
 
                 <TextView
                     android:id="@+id/tv_login_logo"
@@ -115,7 +116,7 @@
                     android:id="@+id/ll_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btn_login_login"
@@ -128,19 +129,23 @@
                         android:textColor="@color/wncWhite"
                         android:textSize="14sp" />
 
+                    <FrameLayout
+                        android:padding="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{fragment::onRegisterClick}">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:background="?android:selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:onClick="@{fragment::onRegisterClick}"
-                        android:padding="2dp"
                         android:text="@string/login_tv_register"
                         android:textColor="@color/wncWhite"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
+                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
