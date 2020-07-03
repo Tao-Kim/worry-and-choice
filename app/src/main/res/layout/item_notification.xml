@@ -6,24 +6,23 @@
     <data>
         <variable
             name="item"
-            type="com.tao.wnc.model.CommentItem" />
+            type="com.tao.wnc.model.NotificationItem" />
     </data>
 
     <LinearLayout
+        android:focusable="true"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
-            android:background="@color/wncDarkGray"/>
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="25dp"
+        android:background="@drawable/bg_item28"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -32,19 +31,20 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_item_comment_name"
+                    android:id="@+id/tv_item_notifications_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@{item.name}"
+                    android:text="@{item.title}"
                     android:textColor="@color/wncWhite"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_item_comment_message"
+                    android:id="@+id/tv_item_notifications_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -53,22 +53,22 @@
                     android:textColor="@color/wncLightGray"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_item_comment_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_item_notifications_title"
                     app:layout_constraintBottom_toBottomOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <TextView
-                    android:id="@+id/iv_comment_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{item.time}"
-                    android:textSize="11sp"
-                    android:textColor="@color/wncGray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
+            <TextView
+                android:id="@+id/iv_comment_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.time}"
+                android:textSize="11sp"
+                android:textColor="@color/wncGray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

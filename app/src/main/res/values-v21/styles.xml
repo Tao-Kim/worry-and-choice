@@ -6,6 +6,6 @@
         <item name="colorPrimary">@color/wncDeepDarkOrange</item>
         <item name="colorPrimaryDark">@color/wncIndigo</item>
         <item name="colorAccent">@color/wncOrange</item>
-        <item name="android:colorControlHighlight">@color/wncBlue</item>
+        <item name="android:colorControlHighlight">@color/wnc28Orange</item>
     </style>
 </resources>
