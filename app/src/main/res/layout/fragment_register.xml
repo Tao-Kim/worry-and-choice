@@ -6,17 +6,17 @@
     <data>
         <variable
             name="fragment"
-            type="com.tao.wnc.view.RegisterFragment" />
+            type="com.tao.wnc.RegisterFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main"
-        tools:context=".view.MainActivity">
+        tools:context=".MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_register_nav"
+            android:id="@+id/register_nav_container"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
                 android:layout_height="46dp"
                 android:onClick="@{fragment::onBackClick}"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_back"
+                android:src="@drawable/ib_back_default"
                 android:focusable="true"
                 android:clickable="true"
                 android:background="?android:selectableItemBackground"
@@ -51,14 +51,14 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/container_register_nav">
+            app:layout_constraintTop_toBottomOf="@id/register_nav_container">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edt_register_name"
+                    android:id="@+id/register_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="44dp"
@@ -80,7 +80,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edt_register_email"
+                    android:id="@+id/register_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="44dp"
@@ -99,10 +99,10 @@
                     app:drawableStartCompat="@drawable/ic_email"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_register_name" />
+                    app:layout_constraintTop_toBottomOf="@id/register_name" />
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edt_register_password"
+                    android:id="@+id/register_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="44dp"
@@ -121,10 +121,10 @@
                     app:drawableStartCompat="@drawable/ic_lock"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_register_email" />
+                    app:layout_constraintTop_toBottomOf="@id/register_email" />
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edt_register_password_again"
+                    android:id="@+id/register_password_again"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="44dp"
@@ -143,7 +143,7 @@
                     app:drawableStartCompat="@drawable/ic_lock"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_register_password" />
+                    app:layout_constraintTop_toBottomOf="@id/register_password" />
 
                 <Button
                     android:id="@+id/btn_register_submit"
@@ -160,7 +160,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_register_password_again"
+                    app:layout_constraintTop_toBottomOf="@+id/register_password_again"
                     app:layout_constraintVertical_bias="0.0" />
                 <LinearLayout
                     android:layout_width="wrap_content"

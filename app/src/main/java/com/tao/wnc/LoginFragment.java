@@ -1,4 +1,4 @@
-package com.tao.wnc.view;
+package com.tao.wnc;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentLoginBinding;
 
 /**

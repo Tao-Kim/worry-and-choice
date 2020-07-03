@@ -20,7 +20,4 @@
     <string name="register_edt_password_hint">비밀번호</string>
     <string name="register_edt_password_again_hint">비밀번호 확인</string>
     <string name="register_btn_submit">가입</string>
-
-    <!-- Strings related to list -->
-    <string name="list_title">선택이 필요해요</string>
 </resources>

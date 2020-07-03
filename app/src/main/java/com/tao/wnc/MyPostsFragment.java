@@ -1,4 +1,4 @@
-package com.tao.wnc.view;
+package com.tao.wnc;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,22 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.tao.wnc.R;
-import com.tao.wnc.databinding.FragmentNotificationsBinding;
+import com.tao.wnc.databinding.FragmentMyPostsBinding;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NotificationsFragment#newInstance} factory method to
+ * Use the {@link MyPostsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotificationsFragment extends Fragment {
+public class MyPostsFragment extends Fragment {
 
-    public NotificationsFragment() {
+    public MyPostsFragment() {
         // Required empty public constructor
     }
 
-    public static NotificationsFragment newInstance() {
-        return new NotificationsFragment();
+    public static MyPostsFragment newInstance() {
+        return new MyPostsFragment();
     }
 
     @Override
@@ -35,14 +34,18 @@ public class NotificationsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentNotificationsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false);
+        FragmentMyPostsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_posts, container, false);
         binding.setFragment(this);
 
         return binding.getRoot();
     }
 
-    public void onUndoClick(View v) {
-        ((MainActivity) getActivity()).removeAndPop(this);
+    public void onUndoClick(View v){
+        ((MainActivity)getActivity()).removeAndPop(this);
+    }
+
+    public void onReadPostClick(View v){
+        ((MainActivity)getActivity()).replaceWithBackStack(ReadPostFragment.newInstance());
     }
 
 }
