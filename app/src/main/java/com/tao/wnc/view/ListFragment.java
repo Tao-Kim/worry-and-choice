@@ -1,7 +1,6 @@
 package com.tao.wnc.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("listFragment", "onDestory");
         binding = null;
         adapter = null;
         viewModel = null;

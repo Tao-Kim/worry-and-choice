@@ -37,9 +37,9 @@ public class NotificationsFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentNotificationsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false);
         binding.setFragment(this);
+
         return binding.getRoot();
     }
-
 
     public void onUndoClick(View v) {
         ((MainActivity) getActivity()).removeAndPop(this);

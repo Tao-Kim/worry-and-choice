@@ -11,8 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".view.LoginActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|screenSize">
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,9 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.MainActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".view.MainActivity"/>
     </application>
 
 </manifest>
