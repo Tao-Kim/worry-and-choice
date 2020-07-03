@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.tao.wnc.model.PostItem" />
+            type="com.tao.wnc.model.ListItem" />
     </data>
 
     <LinearLayout
@@ -16,9 +16,9 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="25dp"
-        android:background="@drawable/bg_item28"
+        android:background="@drawable/bg_item"
         android:paddingHorizontal="10dp"
-        android:paddingVertical="6dp">
+        android:paddingVertical="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,12 +29,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
-                app:layout_constraintEnd_toStartOf="@id/iv_item_post_sentiment"
+                app:layout_constraintEnd_toStartOf="@id/iv_list_item_sentiment"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_item_post_title"
+                    android:id="@+id/tv_list_item_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -47,47 +47,48 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_item_post_description"
+                    android:id="@+id/tv_list_item_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@{item.description}"
-                    android:textColor="@color/wncLightGray"
-                    android:textSize="12sp"
+                    android:textColor="@color/wncWhite"
+                    android:textSize="10sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_item_post_title"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_list_item_title"
+                    tools:ignore="SmallSp" />
 
                 <TextView
-                    android:id="@+id/tv_item_post_others"
+                    android:id="@+id/tv_list_item_others"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{item.others}"
-                    android:textColor="@color/wncGray"
-                    android:textSize="11sp"
+                    android:textColor="@color/wncLightGray"
+                    android:textSize="9sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_item_post_description"
+                    app:layout_constraintTop_toBottomOf="@id/tv_list_item_description"
                     tools:ignore="SmallSp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_item_post_sentiment"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
+                    android:id="@+id/iv_list_item_sentiment"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/container_item_post_counts"
                     android:src="@{item.selected ? @drawable/ic_sentiment_very_satisfied : @drawable/ic_sentiment_dissatisfied}"/>
 
                 <LinearLayout
-                    android:id="@+id/container_item_post_counts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    app:layout_constraintBottom_toBottomOf="parent
+"
+                    app:layout_constraintTop_toBottomOf="@id/iv_list_item_sentiment">
 
                     <ImageView
                         android:layout_width="8dp"
@@ -96,7 +97,7 @@
                         app:srcCompat="@drawable/ic_check" />
 
                     <TextView
-                        android:id="@+id/tv_item_post_check_counts"
+                        android:id="@+id/tv_list_item_check_counts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{item.checkCounts}"
@@ -113,7 +114,7 @@
                         app:srcCompat="@drawable/ic_chat" />
 
                     <TextView
-                        android:id="@+id/tv_item_post_comment_counts"
+                        android:id="@+id/tv_list_item_comment_counts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{item.commentCounts}"

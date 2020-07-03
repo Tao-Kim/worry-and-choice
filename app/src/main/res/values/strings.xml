@@ -26,9 +26,4 @@
 
     <!-- Strings related to my posts -->
     <string name="my_posts_title">나의 고민이에요</string>
-
-    <!-- Strings related to read post -->
-    <string name="read_post_title_dissatisfied">고민 중이에요..</string>
-    <string name="read_post_title_satisfied">선택했어요!</string
-    <string name="read_post_comment_hint">댓글을 남겨주세요</string>
 </resources>

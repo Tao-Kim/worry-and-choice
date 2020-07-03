@@ -24,10 +24,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbarThumbVertical="@color/wnc28Orange">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -37,9 +34,9 @@
                     android:id="@+id/tv_login_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="77dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
                     android:fontFamily="@font/h2mjre"
                     android:lineSpacingExtra="7dp"
                     android:text="@string/login_logo"
@@ -52,45 +49,45 @@
                     android:id="@+id/edt_login_username"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="44dp"
                     android:layout_marginTop="212dp"
+                    android:layout_marginLeft="44dp"
                     android:layout_marginRight="44dp"
-                    android:drawablePadding="5dp"
                     android:hint="@string/login_edt_email_hint"
-                    android:imeActionLabel="@string/ime_next"
                     android:imeOptions="actionNext"
+                    android:imeActionLabel="@string/ime_next"
                     android:inputType="textEmailAddress"
                     android:selectAllOnFocus="true"
                     android:textColor="@color/wncLightGray"
                     android:textColorHint="@color/wncLightGray"
                     app:backgroundTint="@color/wncLightGray"
-                    app:drawableLeftCompat="@drawable/ic_email"
-                    app:drawableStartCompat="@drawable/ic_email"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_login_logo" />
+                    app:layout_constraintTop_toTopOf="@id/tv_login_logo"
+                    app:drawableLeftCompat="@drawable/ic_email"
+                    app:drawableStartCompat="@drawable/ic_email"
+                    android:drawablePadding="5dp"/>
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edt_login_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="44dp"
                     android:layout_marginTop="13dp"
+                    android:layout_marginLeft="44dp"
                     android:layout_marginRight="44dp"
-                    android:drawablePadding="5dp"
                     android:hint="@string/login_edt_password_hint"
-                    android:imeActionLabel="@string/ime_send"
                     android:imeOptions="actionSend"
+                    android:imeActionLabel="@string/ime_send"
                     android:inputType="textPassword"
                     android:selectAllOnFocus="true"
                     android:textColor="@color/wncLightGray"
                     android:textColorHint="@color/wncLightGray"
                     app:backgroundTint="@color/wncLightGray"
-                    app:drawableLeftCompat="@drawable/ic_lock"
-                    app:drawableStartCompat="@drawable/ic_lock"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_login_username" />
+                    app:layout_constraintTop_toBottomOf="@+id/edt_login_username"
+                    app:drawableLeftCompat="@drawable/ic_lock"
+                    app:drawableStartCompat="@drawable/ic_lock"
+                    android:drawablePadding="5dp" />
 
                 <Button
                     android:id="@+id/btn_login_login"
@@ -101,9 +98,9 @@
                     android:layout_marginRight="52dp"
                     android:onClick="@{fragment::onLoginClick}"
                     android:text="@string/login_btn_login"
-                    android:textColor="@color/wncWhite"
-                    android:textSize="18sp"
                     android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/wncWhite"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -128,18 +125,18 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:padding="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:background="?android:selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
+                        android:layout_marginStart="8dp"
                         android:onClick="@{fragment::onRegisterClick}"
-                        android:padding="2dp"
                         android:text="@string/login_tv_register"
                         android:textColor="@color/wncWhite"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:background="?android:selectableItemBackground"/>
                 </LinearLayout>
 
                 <LinearLayout

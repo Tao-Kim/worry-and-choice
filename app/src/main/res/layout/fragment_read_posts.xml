@@ -6,12 +6,13 @@
     <data>
         <variable
             name="fragment"
-            type="com.tao.wnc.view.MyPostsFragment" />
+            type="com.tao.wnc.view.ReadPostFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_main"
         tools:context=".view.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +27,7 @@
             <ImageButton
                 android:layout_width="31dp"
                 android:layout_height="31dp"
-                android:background="?android:selectableItemBackgroundBorderless"
+                android:background="?android:selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="@{fragment::onBackClick}"
@@ -51,7 +52,7 @@
             <ImageButton
                 android:layout_width="31dp"
                 android:layout_height="31dp"
-                android:background="?android:selectableItemBackgroundBorderless"
+                android:background="?android:selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="@{fragment::onRefreshClick}"
@@ -65,15 +66,10 @@
 
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_my_posts"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scrollbars="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/container_my_posts_nav"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
 
 
 

@@ -45,7 +45,7 @@ public class MyPostsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_posts, container, false);
+        FragmentMyPostsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_posts, container, false);
         binding.setFragment(this);
 
         RecyclerView recyclerView = binding.rvMyPosts;
@@ -62,14 +62,6 @@ public class MyPostsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(MyPostsViewModel.class);
         getList();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-        adapter = null;
-        viewModel = null;
     }
 
     private void getList(){

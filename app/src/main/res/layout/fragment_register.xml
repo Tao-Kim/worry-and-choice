@@ -53,9 +53,6 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbarThumbVertical="@color/wnc28Orange"
             app:layout_constraintTop_toBottomOf="@id/container_register_nav">
 
             <androidx.constraintlayout.widget.ConstraintLayout

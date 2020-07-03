@@ -6,17 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
-import com.tao.wnc.adapter.CommentListAdapter;
-import com.tao.wnc.databinding.FragmentReadPostBinding;
-import com.tao.wnc.viewmodel.ReadPostViewModel;
+import com.tao.wnc.databinding.FragmentReadPostsBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,10 +18,6 @@ import com.tao.wnc.viewmodel.ReadPostViewModel;
  * create an instance of this fragment.
  */
 public class ReadPostFragment extends Fragment {
-
-    private FragmentReadPostBinding binding;
-    private ReadPostViewModel viewModel;
-    private CommentListAdapter adapter;
 
     public ReadPostFragment() {
         // Required empty public constructor
@@ -45,35 +35,10 @@ public class ReadPostFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_read_post, container, false);
+        FragmentReadPostsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_read_posts, container, false);
         binding.setFragment(this);
 
-        RecyclerView recyclerView = binding.rvReadPostComment;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        adapter = new CommentListAdapter();
-        recyclerView.setAdapter(adapter);
-
         return binding.getRoot();
-    }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ReadPostViewModel.class);
-        getList();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-        adapter = null;
-        viewModel = null;
-    }
-
-    private void getList(){
-        adapter.setItems(viewModel.getListItems());
     }
 
     public void onBackClick(View v) {

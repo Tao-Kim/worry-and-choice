@@ -3,33 +3,21 @@
     <color name="wncLogo">#D3AC97</color>
 
     <color name="wncPureWhite">#FFFFFF</color>
-    <color name="wncPureBlack">#000000</color>
     <color name="wncLightIndigo">#223F7E</color>
     <color name="wncIndigo">#0A142A</color>
 
     <color name="wncWhite">#E8E8E8</color>
     <color name="wncLightGray">#CBCBCB</color>
-    <color name="wncGray">#B7B7B7</color>
     <color name="wncDarkGray">#707070</color>
-    <color name="wncDeepDarkGray">#656464</color>
     <color name="wncOrange">#FFD500</color>
     <color name="wncDarkOrange">#DEB200</color>
     <color name="wncDeepDarkOrange">#C09A00</color>
     <color name="wncBlue">#02A2B4</color>
     <color name="wncRed">#C41F1F</color>
 
-
     <color name="wnc28White">#47E8E8E8</color>
     <color name="wnc45White">#73E8E8E8</color>
-    <color name="wnc60White">#99E8E8E8</color>
-
     <color name="wnc28LightGray">#47CDCDCD</color>
-    <color name="wnc45LightGray">#73CDCDCD</color>
-    <color name="wnc60LightGray">#99E8E8E8</color>
-
-    <color name="wnc28Orange">#48FFD500</color>
     <color name="wnc45Orange">#73FFD500</color>
-
-
     <color name="wncNone">#0000</color>
 </resources>
