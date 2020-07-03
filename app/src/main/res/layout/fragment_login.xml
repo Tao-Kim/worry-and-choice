@@ -36,7 +36,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="77dp"
                     android:layout_marginLeft="50dp"
-                    android:layout_marginStart="50dp"
                     android:fontFamily="@font/h2mjre"
                     android:lineSpacingExtra="7dp"
                     android:text="@string/login_logo"
@@ -125,18 +124,13 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:padding="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"
                         android:onClick="@{fragment::onRegisterClick}"
                         android:text="@string/login_tv_register"
                         android:textColor="@color/wncWhite"
-                        android:textSize="16sp"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:background="?android:selectableItemBackground"/>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout

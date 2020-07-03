@@ -4,7 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/wncDeepDarkOrange</item>
         <item name="colorPrimaryDark">@color/wncIndigo</item>
-        <item name="colorAccent">@color/wncDeepDarkOrange</item>
+        <item name="colorAccent">@color/wncPureWhite</item>
     </style>
 
 </resources>
