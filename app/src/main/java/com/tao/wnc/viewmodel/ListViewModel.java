@@ -3,20 +3,33 @@ package com.tao.wnc.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.model.domain.PostItem;
+import com.tao.wnc.model.repository.UserRepository;
 
 import java.util.ArrayList;
 
 public class ListViewModel extends ViewModel {
+
+    private final static String TAG = ListViewModel.class.getName();
     private ArrayList<PostItem> items;
+    private UserRepository userRepository;
 
     public ListViewModel() {
         items = new ArrayList<>();
         setTestDataSet();
+
+        userRepository = new UserRepository();
+    }
+
+    public void setDataBaseToken(String deviceToken) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String name = user.getDisplayName();
+        userRepository.insertOrModifyUserToken(name, deviceToken);
     }
 
     public ArrayList<PostItem> getListItems() {
-
         return items;
     }
 

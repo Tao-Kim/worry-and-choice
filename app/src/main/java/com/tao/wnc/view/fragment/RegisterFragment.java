@@ -56,6 +56,13 @@ public class RegisterFragment extends Fragment {
         observeRegisterResult();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        viewModel = null;
+    }
+
     public void onBackClick(View v) {
         ((LoginActivity) getActivity()).removeAndPop(this);
     }

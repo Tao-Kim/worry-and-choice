@@ -64,6 +64,13 @@ public class LoginFragment extends Fragment {
         observeLoginResult();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        viewModel = null;
+    }
+
     private void initBackgroundImage() {
         Glide.with(this).asGif().load(R.raw.login_background).into(binding.loginIvBackground);
     }

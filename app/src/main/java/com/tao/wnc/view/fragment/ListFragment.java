@@ -13,11 +13,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.tao.wnc.R;
-import com.tao.wnc.view.activity.MainActivity;
-import com.tao.wnc.view.adapter.PostListAdapter;
 import com.tao.wnc.databinding.FragmentListBinding;
 import com.tao.wnc.model.domain.PostItem;
+import com.tao.wnc.view.activity.MainActivity;
+import com.tao.wnc.view.adapter.PostListAdapter;
 import com.tao.wnc.viewmodel.ListViewModel;
 
 
@@ -64,6 +67,7 @@ public class ListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initToken();
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         getList();
     }
@@ -74,6 +78,16 @@ public class ListFragment extends Fragment {
         binding = null;
         adapter = null;
         viewModel = null;
+    }
+
+    private void initToken(){
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(getActivity(), new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String deviceToken = instanceIdResult.getToken();
+                viewModel.setDataBaseToken(deviceToken);
+            }
+        });
     }
 
     private void getList(){

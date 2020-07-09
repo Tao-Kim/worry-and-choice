@@ -95,4 +95,29 @@ public class UserRepository {
         });
     }
 
+    public void insertOrModifyUserToken(final String name, final String token){
+        ref.child("users").orderByChild("name").equalTo(name).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                ref.child("users").child(dataSnapshot.getKey()).child("token").setValue(token);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, databaseError.toString());
+            }
+        });
+    }
 }
