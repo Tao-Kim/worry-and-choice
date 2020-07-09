@@ -40,7 +40,7 @@ public class LoginViewModel extends ViewModel {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                            loginResultLiveData.setValue(Constants.AUTH.LOGIN_SUCCESS);
+                        loginResultLiveData.setValue(Constants.AUTH.LOGIN_SUCCESS);
                     } else {
                         try {
                             throw task.getException();

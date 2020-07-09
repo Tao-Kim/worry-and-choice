@@ -3,7 +3,9 @@ package com.tao.wnc.model.repository;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,14 +15,14 @@ import com.tao.wnc.model.domain.RegisterByEmailItem;
 import com.tao.wnc.util.Constants;
 import com.tao.wnc.util.SingleLiveEvent;
 
-public class AuthRepository {
+public class UserRepository {
 
-    private static final String TAG = AuthRepository.class.getName();
+    private static final String TAG = UserRepository.class.getName();
     private FirebaseDatabase db;
     private DatabaseReference ref;
     private SingleLiveEvent<Short> resultCodeLiveData;
 
-    public AuthRepository() {
+    public UserRepository() {
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
         resultCodeLiveData = new SingleLiveEvent<>();
@@ -63,6 +65,32 @@ public class AuthRepository {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 resultCodeLiveData.setValue(Constants.DB.INSERT_USER_FAIL);
                 Log.w(TAG, "insert user fail in name check");
+            }
+        });
+    }
+
+    public void deleteUser(String name) {
+        ref.child("users").orderByChild("name").equalTo(name).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                ref.child("users").child(dataSnapshot.getKey()).setValue(null);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, databaseError.toString());
             }
         });
     }
