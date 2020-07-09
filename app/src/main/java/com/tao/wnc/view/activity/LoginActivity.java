@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.tao.wnc.R;
@@ -28,6 +30,12 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void removeAndPop(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().remove(fragment).commit();
+        fragmentManager.popBackStack();
     }
 
 //    public void replaceRegisterFragment(){

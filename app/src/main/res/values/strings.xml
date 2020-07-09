@@ -13,6 +13,12 @@
     <string name="login_tv_guide_register">처음 오셨나요?</string>
     <string name="login_tv_register">회원가입</string>
 
+    <string name="login_result_fail">로그인에 오류가 발생했어요. 잠시후 다시 시도해주세요.</string>
+    <string name="login_result_wrong_email">존재하지 않는 이메일이에요.</string>
+    <string name="login_result_wrong_password">비밀번호가 틀렸어요.</string>
+    <string name="login_result_null_email">이메일이 입력되지 않았어요.</string>
+    <string name="login_result_null_password">비밀번호가 입력되지 않았어요.</string>
+
     <!-- Strings related to register -->
     <string name="register_title">회원가입</string>
     <string name="register_edt_name_hint">별명(한글)</string>

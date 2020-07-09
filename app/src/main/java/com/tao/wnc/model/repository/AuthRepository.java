@@ -1,5 +1,7 @@
 package com.tao.wnc.model.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -11,19 +13,21 @@ import com.tao.wnc.model.domain.RegisterByEmailItem;
 import com.tao.wnc.util.Constants;
 import com.tao.wnc.util.SingleLiveEvent;
 
-public class FirebaseRepository {
+public class AuthRepository {
+
+    private static final String TAG = AuthRepository.class.getName();
     private FirebaseDatabase db;
     private DatabaseReference ref;
-    private SingleLiveEvent<Short> resultCode;
+    private SingleLiveEvent<Short> resultCodeLiveData;
 
-    public FirebaseRepository() {
+    public AuthRepository() {
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
-        resultCode = new SingleLiveEvent<>();
+        resultCodeLiveData = new SingleLiveEvent<>();
     }
 
     public SingleLiveEvent<Short> getResultCodeLiveData() {
-        return resultCode;
+        return resultCodeLiveData;
     }
 
     public void insertUser(final String name, final String email) {
@@ -37,26 +41,28 @@ public class FirebaseRepository {
                             if (!dataSnapshot.exists()) {
                                 RegisterByEmailItem item = new RegisterByEmailItem(name, email);
                                 ref.child("users").push().setValue(item);
-                                resultCode.setValue(Constants.DB.INSERT_USER_SUCCESS);
+                                resultCodeLiveData.setValue(Constants.DB.INSERT_USER_SUCCESS);
                             } else {
-                                resultCode.setValue(Constants.DB.INSERT_USER_FAIL_EXIST_EMAIL);
+                                resultCodeLiveData.setValue(Constants.DB.INSERT_USER_FAIL_EXIST_EMAIL);
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            resultCode.setValue(Constants.DB.INSERT_USER_FAIL);
+                            resultCodeLiveData.setValue(Constants.DB.INSERT_USER_FAIL);
+                            Log.w(TAG, "insert user fail in email check");
                         }
                     });
 
                 } else {
-                    resultCode.setValue(Constants.DB.INSERT_USER_FAIL_EXIST_NAME);
+                    resultCodeLiveData.setValue(Constants.DB.INSERT_USER_FAIL_EXIST_NAME);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                resultCode.setValue(Constants.DB.INSERT_USER_FAIL);
+                resultCodeLiveData.setValue(Constants.DB.INSERT_USER_FAIL);
+                Log.w(TAG, "insert user fail in name check");
             }
         });
     }
