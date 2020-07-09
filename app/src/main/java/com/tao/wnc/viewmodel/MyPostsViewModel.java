@@ -3,7 +3,7 @@ package com.tao.wnc.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
-import com.tao.wnc.model.PostItem;
+import com.tao.wnc.model.domain.PostItem;
 
 import java.util.ArrayList;
 

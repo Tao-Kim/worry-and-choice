@@ -21,6 +21,8 @@
     <string name="register_edt_password_again_hint">비밀번호 확인</string>
     <string name="register_btn_submit">가입</string>
 
+    <string name="register_result_duplicated_email">이미 가입되어 있는 이메일이에요.</string>
+
     <!-- Strings related to list -->
     <string name="list_title">선택이 필요해요</string>
 
@@ -37,4 +39,6 @@
 
     <!-- String related to add post -->
     <string name="add_post_title">고민을 나누세요</string>
+
+
 </resources>

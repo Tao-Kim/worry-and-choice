@@ -1,4 +1,4 @@
-package com.tao.wnc.adapter;
+package com.tao.wnc.view.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,9 +8,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
-import com.tao.wnc.adapter.viewholder.CommentListViewHolder;
+import com.tao.wnc.view.adapter.viewholder.CommentListViewHolder;
 import com.tao.wnc.databinding.ItemCommentBinding;
-import com.tao.wnc.model.CommentItem;
+import com.tao.wnc.model.domain.CommentItem;
 
 import java.util.ArrayList;
 

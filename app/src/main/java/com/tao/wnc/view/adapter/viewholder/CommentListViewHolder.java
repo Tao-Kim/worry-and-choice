@@ -1,4 +1,4 @@
-package com.tao.wnc.adapter.viewholder;
+package com.tao.wnc.view.adapter.viewholder;
 
 import androidx.recyclerview.widget.RecyclerView;
 

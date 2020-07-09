@@ -1,4 +1,4 @@
-package com.tao.wnc.view;
+package com.tao.wnc.view.activity;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.tao.wnc.R;
+import com.tao.wnc.view.fragment.ListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.tao.wnc.view;
+package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentAddPostBinding;
+import com.tao.wnc.view.activity.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.

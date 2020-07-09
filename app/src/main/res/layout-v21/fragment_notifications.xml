@@ -6,14 +6,14 @@
     <data>
         <variable
             name="fragment"
-            type="com.tao.wnc.view.NotificationsFragment" />
+            type="com.tao.wnc.view.fragment.NotificationsFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main"
-        tools:context=".view.MainActivity">
+        tools:context=".view.activity.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_notifications_nav"

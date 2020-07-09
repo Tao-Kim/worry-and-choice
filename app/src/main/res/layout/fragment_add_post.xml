@@ -7,14 +7,14 @@
 
         <variable
             name="fragment"
-            type="com.tao.wnc.view.AddPostFragment" />
+            type="com.tao.wnc.view.fragment.AddPostFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main"
-        tools:context=".view.MainActivity">
+        tools:context=".view.activity.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_add_post_nav"

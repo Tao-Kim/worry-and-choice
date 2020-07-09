@@ -1,22 +1,22 @@
-package com.tao.wnc.model;
+package com.tao.wnc.model.domain;
 
-public class CommentItem {
-    private String name;
+public class NotificationItem {
+    private String title;
     private String message;
     private String time;
 
-    public CommentItem(String name, String message, String time) {
-        this.name = name;
+    public NotificationItem(String title, String message, String time) {
+        this.title = title;
         this.message = message;
         this.time = time;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getMessage() {

@@ -1,4 +1,4 @@
-package com.tao.wnc.model;
+package com.tao.wnc.model.domain;
 
 public class PostItem {
     private String title;

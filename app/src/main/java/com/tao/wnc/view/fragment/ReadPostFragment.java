@@ -1,4 +1,4 @@
-package com.tao.wnc.view;
+package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,27 +14,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
-import com.tao.wnc.adapter.NotificationListAdapter;
-import com.tao.wnc.databinding.FragmentNotificationsBinding;
-import com.tao.wnc.viewmodel.NotificationsViewModel;
+import com.tao.wnc.view.activity.MainActivity;
+import com.tao.wnc.view.adapter.CommentListAdapter;
+import com.tao.wnc.databinding.FragmentReadPostBinding;
+import com.tao.wnc.viewmodel.ReadPostViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NotificationsFragment#newInstance} factory method to
+ * Use the {@link ReadPostFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotificationsFragment extends Fragment {
+public class ReadPostFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
-    private NotificationsViewModel viewModel;
-    private NotificationListAdapter adapter;
+    private FragmentReadPostBinding binding;
+    private ReadPostViewModel viewModel;
+    private CommentListAdapter adapter;
 
-    public NotificationsFragment() {
+    public ReadPostFragment() {
         // Required empty public constructor
     }
 
-    public static NotificationsFragment newInstance() {
-        return new NotificationsFragment();
+    public static ReadPostFragment newInstance() {
+        return new ReadPostFragment();
     }
 
     @Override
@@ -45,23 +46,31 @@ public class NotificationsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentNotificationsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_read_post, container, false);
         binding.setFragment(this);
 
-        RecyclerView recyclerView = binding.rvNotifications;
+        RecyclerView recyclerView = binding.rvReadPostComment;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        adapter = new NotificationListAdapter();
+        recyclerView.setNestedScrollingEnabled(false);
+        adapter = new CommentListAdapter();
         recyclerView.setAdapter(adapter);
 
         return binding.getRoot();
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ReadPostViewModel.class);
         getList();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        adapter = null;
+        viewModel = null;
     }
 
     private void getList(){
@@ -72,8 +81,7 @@ public class NotificationsFragment extends Fragment {
         ((MainActivity) getActivity()).removeAndPop(this);
     }
 
-    public void onNotificationClick(View v){
+    public void onRefreshClick(View v) {
 
     }
-
 }

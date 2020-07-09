@@ -3,7 +3,7 @@ package com.tao.wnc.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
-import com.tao.wnc.model.NotificationItem;
+import com.tao.wnc.model.domain.NotificationItem;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.tao.wnc.view;
+package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
-import com.tao.wnc.adapter.PostListAdapter;
+import com.tao.wnc.view.activity.MainActivity;
+import com.tao.wnc.view.adapter.PostListAdapter;
 import com.tao.wnc.databinding.FragmentListBinding;
-import com.tao.wnc.model.PostItem;
+import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.viewmodel.ListViewModel;
 
 

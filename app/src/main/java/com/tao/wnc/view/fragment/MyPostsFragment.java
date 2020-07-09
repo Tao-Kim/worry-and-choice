@@ -1,4 +1,4 @@
-package com.tao.wnc.view;
+package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,27 +14,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
-import com.tao.wnc.adapter.CommentListAdapter;
-import com.tao.wnc.databinding.FragmentReadPostBinding;
-import com.tao.wnc.viewmodel.ReadPostViewModel;
+import com.tao.wnc.view.activity.MainActivity;
+import com.tao.wnc.view.adapter.PostListAdapter;
+import com.tao.wnc.databinding.FragmentMyPostsBinding;
+import com.tao.wnc.viewmodel.MyPostsViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ReadPostFragment#newInstance} factory method to
+ * Use the {@link MyPostsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReadPostFragment extends Fragment {
+public class MyPostsFragment extends Fragment {
 
-    private FragmentReadPostBinding binding;
-    private ReadPostViewModel viewModel;
-    private CommentListAdapter adapter;
+    private FragmentMyPostsBinding binding;
+    private MyPostsViewModel viewModel;
+    private PostListAdapter adapter;
 
-    public ReadPostFragment() {
+    public MyPostsFragment() {
         // Required empty public constructor
     }
 
-    public static ReadPostFragment newInstance() {
-        return new ReadPostFragment();
+    public static MyPostsFragment newInstance() {
+        return new MyPostsFragment();
     }
 
     @Override
@@ -45,22 +46,22 @@ public class ReadPostFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_read_post, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_posts, container, false);
         binding.setFragment(this);
 
-        RecyclerView recyclerView = binding.rvReadPostComment;
+        RecyclerView recyclerView = binding.rvMyPosts;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        adapter = new CommentListAdapter();
+        adapter = new PostListAdapter();
         recyclerView.setAdapter(adapter);
 
         return binding.getRoot();
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ReadPostViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MyPostsViewModel.class);
         getList();
     }
 
@@ -76,11 +77,16 @@ public class ReadPostFragment extends Fragment {
         adapter.setItems(viewModel.getListItems());
     }
 
-    public void onBackClick(View v) {
-        ((MainActivity) getActivity()).removeAndPop(this);
+    public void onBackClick(View v){
+        ((MainActivity)getActivity()).removeAndPop(this);
     }
 
-    public void onRefreshClick(View v) {
+    public void onRefreshClick(View v){
 
     }
+
+    public void onReadPostClick(View v){
+        ((MainActivity)getActivity()).replaceWithBackStack(ReadPostFragment.newInstance());
+    }
+
 }

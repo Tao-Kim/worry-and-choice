@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.tao.wnc.model.CommentItem" />
+            type="com.tao.wnc.model.domain.CommentItem" />
     </data>
 
     <LinearLayout

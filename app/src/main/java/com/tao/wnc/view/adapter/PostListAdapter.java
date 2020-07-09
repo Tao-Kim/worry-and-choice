@@ -1,4 +1,4 @@
-package com.tao.wnc.adapter;
+package com.tao.wnc.view.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +9,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
-import com.tao.wnc.adapter.viewholder.PostListViewHolder;
+import com.tao.wnc.view.adapter.viewholder.PostListViewHolder;
 import com.tao.wnc.databinding.ItemPostBinding;
-import com.tao.wnc.model.PostItem;
+import com.tao.wnc.model.domain.PostItem;
 
 import java.util.ArrayList;
 

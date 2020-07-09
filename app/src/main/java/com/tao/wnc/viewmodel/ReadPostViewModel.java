@@ -3,7 +3,7 @@ package com.tao.wnc.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
-import com.tao.wnc.model.CommentItem;
+import com.tao.wnc.model.domain.CommentItem;
 
 import java.util.ArrayList;
 

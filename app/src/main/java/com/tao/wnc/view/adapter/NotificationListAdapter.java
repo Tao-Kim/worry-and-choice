@@ -1,4 +1,4 @@
-package com.tao.wnc.adapter;
+package com.tao.wnc.view.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +9,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
-import com.tao.wnc.adapter.viewholder.NotificationListViewHolder;
+import com.tao.wnc.view.adapter.viewholder.NotificationListViewHolder;
 import com.tao.wnc.databinding.ItemNotificationBinding;
-import com.tao.wnc.model.NotificationItem;
+import com.tao.wnc.model.domain.NotificationItem;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.tao.wnc.view;
+package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentLoginBinding;
+import com.tao.wnc.view.activity.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,10 +46,14 @@ public class LoginFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         binding.setFragment(this);
 
-        Glide.with(this).asGif().load(R.raw.login_background).into(binding.loginIvBackground);
+        initBackgroundImage();
 
         View root = binding.getRoot();
         return root;
+    }
+
+    private void initBackgroundImage(){
+        Glide.with(this).asGif().load(R.raw.login_background).into(binding.loginIvBackground);
     }
 
     public void onLoginClick(View v) {
