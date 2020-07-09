@@ -90,7 +90,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="44dp"
                     android:drawablePadding="5dp"
-                    android:hint="@string/login_edt_email_hint"
+                    android:hint="@string/register_edt_email_hint"
                     android:imeActionLabel="@string/ime_next"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"

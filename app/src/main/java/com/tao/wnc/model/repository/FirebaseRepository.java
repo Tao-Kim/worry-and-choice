@@ -1,7 +1,5 @@
 package com.tao.wnc.model.repository;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +30,6 @@ public class FirebaseRepository {
         ref.child("users").orderByChild("name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("dbOnDataCahge", "change!!!!!");
                 if (!dataSnapshot.exists()) {
                     ref.child("users").orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override

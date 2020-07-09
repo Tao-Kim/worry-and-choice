@@ -1,7 +1,5 @@
 package com.tao.wnc.viewmodel;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -14,6 +12,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.tao.wnc.model.repository.FirebaseRepository;
 import com.tao.wnc.util.Constants;
 import com.tao.wnc.util.SingleLiveEvent;
+
+import java.util.regex.Pattern;
 
 public class RegisterViewModel extends ViewModel {
 
@@ -31,10 +31,7 @@ public class RegisterViewModel extends ViewModel {
         dbObserver = new Observer<Short>() {
             @Override
             public void onChanged(Short dbResult) {
-                Log.d("dbChange", "change!!!!!!");
-                if (dbResult == null) Log.d("dbChange", "null!!!!!");
                 if (dbResult != null) {
-                    Log.d("dbChange", Short.toString(dbResult));
                     if (dbResult == Constants.DB.INSERT_USER_FAIL) {
                         signInResult.setValue(Constants.AUTH.REGISTER_FAIL);
                     } else if (dbResult == Constants.DB.INSERT_USER_FAIL_EXIST_NAME) {
@@ -86,23 +83,19 @@ public class RegisterViewModel extends ViewModel {
     }
 
     private boolean isValidName(String name) {
-        Log.d("test", "idvalidname");
-        return true;
+        return Pattern.matches("^[가-힣]*$", name);
     }
 
     private boolean isValidEmail(String email) {
-        Log.d("test", "idvalidEmail");
-        return true;
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isSamePasswords(String password, String passwordAgain) {
-        Log.d("test", "idsamepassword");
         return password.equals(passwordAgain);
     }
 
     private boolean isValidPassword(String password) {
-        Log.d("test", "idvalidnpassword");
-        return true;
+        return password.length() >= 6;
     }
 
 

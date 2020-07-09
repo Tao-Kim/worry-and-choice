@@ -1,10 +1,10 @@
 package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentRegisterBinding;
+import com.tao.wnc.util.Constants;
+import com.tao.wnc.view.activity.LoginActivity;
 import com.tao.wnc.viewmodel.RegisterViewModel;
 
 public class RegisterFragment extends Fragment {
@@ -66,27 +68,42 @@ public class RegisterFragment extends Fragment {
                 binding.edtRegisterEmail.getText().toString(),
                 binding.edtRegisterPassword.getText().toString(),
                 binding.edtRegisterPasswordAgain.getText().toString());
-
-        //((LoginActivity) getActivity()).goMainActivity();
     }
 
-    private void observeRegisterResult(){
+    private void observeRegisterResult() {
         viewModel.getSignInResultLiveData().observe(getViewLifecycleOwner(), new Observer<Short>() {
             @Override
             public void onChanged(Short resultCode) {
-                if(resultCode != null){
-                    Log.d("REGISTER_RESULT_CODE", resultCode.toString());
+                if (resultCode != null) {
                     hideProgressBar();
+                    if (resultCode == Constants.AUTH.REGISTER_FAIL) {
+                        Toast.makeText(getContext(), R.string.register_result_fail, Toast.LENGTH_SHORT).show();
+                    } else if (resultCode == Constants.AUTH.REGISTER_FAIL_EXIST_NAME) {
+                        Toast.makeText(getContext(), R.string.register_result_exist_name, Toast.LENGTH_SHORT).show();
+                    } else if (resultCode == Constants.AUTH.REGISTER_FAIL_EXIST_EMAIL) {
+                        Toast.makeText(getContext(), R.string.register_result_exist_email, Toast.LENGTH_SHORT).show();
+                    } else if (resultCode == Constants.AUTH.REGISTER_FAIL_UNVALID_NAME) {
+                        Toast.makeText(getContext(), R.string.register_result_unvalid_name, Toast.LENGTH_SHORT).show();
+                    } else if (resultCode == Constants.AUTH.REGISTER_FAIL_UNVALID_EMAIL) {
+                        Toast.makeText(getContext(), R.string.register_result_unvalid_email, Toast.LENGTH_SHORT).show();
+                    } else if (resultCode == Constants.AUTH.REGISTER_FAIL_UNVALID_PASSWORD) {
+                        Toast.makeText(getContext(), R.string.register_result_unvalid_password, Toast.LENGTH_SHORT).show();
+                    } else if (resultCode == Constants.AUTH.REGISTER_FAIL_UNSAME_PASSWORDS) {
+                        Toast.makeText(getContext(), R.string.register_result_unsame_passwords, Toast.LENGTH_SHORT).show();
+                    } else if (resultCode == Constants.AUTH.REGISTER_SUCCESS) {
+                        Toast.makeText(getContext(), R.string.register_result_success, Toast.LENGTH_SHORT).show();
+                        ((LoginActivity) getActivity()).goMainActivity();
+                    }
                 }
             }
         });
     }
 
-    private void showProgressBar(){
+    private void showProgressBar() {
         //
     }
 
-    private void hideProgressBar(){
+    private void hideProgressBar() {
         //
     }
 
