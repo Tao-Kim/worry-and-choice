@@ -11,14 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.ItemPostBinding;
 import com.tao.wnc.model.domain.PostItem;
-import com.tao.wnc.util.BindingConstants;
 import com.tao.wnc.view.adapter.viewholder.PostListViewHolder;
 
 import java.util.ArrayList;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
 
-    private ArrayList<PostItem> items;
+    private ArrayList<PostItem> items = new ArrayList<>();
 
     @NonNull
     @Override
@@ -31,7 +30,6 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
     public void onBindViewHolder(@NonNull PostListViewHolder holder, final int position) {
         ItemPostBinding binding = holder.getBinding();
         binding.setItem(items.get(position));
-        binding.setConstants(new BindingConstants());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

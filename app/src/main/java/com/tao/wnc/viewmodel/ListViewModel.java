@@ -1,6 +1,8 @@
 package com.tao.wnc.viewmodel;
 
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -12,6 +14,7 @@ import com.tao.wnc.model.repository.PostRepository;
 import com.tao.wnc.model.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListViewModel extends ViewModel {
 
@@ -20,7 +23,7 @@ public class ListViewModel extends ViewModel {
     private UserRepository userRepository;
     private PostRepository postRepository;
     private MutableLiveData<ArrayList<PostItem>> postsListLiveData;
-    private ArrayList<PostItem> postsList;
+    private ArrayList<PostItem> postsList = new ArrayList<>();
 
 
     public ListViewModel() {
@@ -41,16 +44,25 @@ public class ListViewModel extends ViewModel {
     }
 
     private void observeRepositoryPostsList() {
-        postRepository.getPostsListLiveData().observeForever(new Observer<ArrayList<PostItem>>() {
+        postRepository.getPostsListLiveData().observeForever(new Observer<List<PostItem>>() {
             @Override
-            public void onChanged(ArrayList<PostItem> postItems) {
-                postsList.addAll(postItems);
+            public void onChanged(List<PostItem> postItems) {
+                if (postItems != null && postItems.size() != 0) {
+                    for(PostItem post : postItems){
+                        Log.d(TAG, post.getTitle());
+                        postsList.add(post);
+                    }
+                    postsListLiveData.setValue(postsList);
+                }
+
             }
         });
     }
 
     public void renewalPostsList() {
-        postsList.clear();
+        if (postsList != null) {
+            postsList.clear();
+        }
         postRepository.readPostsList();
     }
 }

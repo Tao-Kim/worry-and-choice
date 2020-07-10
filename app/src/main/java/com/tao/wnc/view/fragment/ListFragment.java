@@ -45,8 +45,6 @@ public class ListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initToken();
-        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        observePostsList();
     }
 
     @Override
@@ -73,6 +71,8 @@ public class ListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        observePostsList();
         viewModel.renewalPostsList();
     }
 

@@ -4,6 +4,8 @@ public class SelectItem {
     private String name;
     private int count;
 
+    public SelectItem(){}
+
     public SelectItem(String name){
         this.name = name;
         count = 0;

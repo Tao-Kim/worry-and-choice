@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.tao.wnc.util.Constants"/>
         <variable
             name="item"
             type="com.tao.wnc.model.domain.PostItem" />
-
-        <variable
-            name="constants"
-            type="com.tao.wnc.util.BindingConstants"/>
     </data>
 
     <LinearLayout
@@ -83,7 +80,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/container_item_post_counts"
-                    android:src="@{(item.selected == constants.NOT_SELECTED) ? @drawable/ic_sentiment_dissatisfied : @drawable/ic_sentiment_very_satisfied}"/>
+                    android:src="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? @drawable/ic_sentiment_dissatisfied : @drawable/ic_sentiment_very_satisfied}"/>
 
                 <LinearLayout
                     android:id="@+id/container_item_post_counts"
@@ -103,7 +100,7 @@
                         android:id="@+id/tv_item_post_check_counts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{item.checkCounts}"
+                        android:text="@{Integer.toString(item.checkCounts)}"
                         android:textColor="@color/wncRed"
                         android:textSize="10sp"
                         tools:ignore="SmallSp" />
@@ -120,7 +117,7 @@
                         android:id="@+id/tv_item_post_comment_counts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{item.commentCounts}"
+                        android:text="@{Integer.toString(item.commentCounts)}"
                         android:textColor="@color/wncBlue"
                         android:textSize="10sp"
                         tools:ignore="SmallSp" />

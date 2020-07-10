@@ -5,6 +5,8 @@ public class CommentItem {
     private String message;
     private String timeStamp;
 
+    public CommentItem(){}
+
     public CommentItem(String userName, String message, String timeStamp) {
         this.userName = userName;
         this.message = message;

@@ -1,7 +1,5 @@
 package com.tao.wnc.model.domain;
 
-import java.util.ArrayList;
-
 public class PostItem {
     private String title;
     private String description;
@@ -10,13 +8,11 @@ public class PostItem {
     private SelectItem selectA;
     private SelectItem selectB;
 
-    private short selected;
-    private ArrayList<CommentItem> comments;
+    private int selected;
     private int checkCounts;
     private int commentCounts;
 
-    public PostItem(){
-
+    public PostItem() {
     }
 
     public PostItem(String title, String description, String writer, String timeStamp, SelectItem selectA, SelectItem selectB, Short selected){
@@ -27,12 +23,11 @@ public class PostItem {
         this.selectA = selectA;
         this.selectB = selectB;
         this.selected = selected;
-        comments = null;
         checkCounts = 0;
         commentCounts = 0;
     }
 
-    public PostItem(String title, String description, String writer, String timeStamp, SelectItem selectA, SelectItem selectB, short selected, ArrayList<CommentItem> comments, int checkCounts, int commentCounts) {
+    public PostItem(String title, String description, String writer, String timeStamp, SelectItem selectA, SelectItem selectB, short selected, int checkCounts, int commentCounts) {
         this.title = title;
         this.description = description;
         this.writer = writer;
@@ -40,7 +35,6 @@ public class PostItem {
         this.selectA = selectA;
         this.selectB = selectB;
         this.selected = selected;
-        this.comments = comments;
         this.checkCounts = checkCounts;
         this.commentCounts = commentCounts;
     }
@@ -93,20 +87,12 @@ public class PostItem {
         this.selectB = selectB;
     }
 
-    public short getSelected() {
+    public int getSelected() {
         return selected;
     }
 
-    public void setSelected(short selected) {
+    public void setSelected(int selected) {
         this.selected = selected;
-    }
-
-    public ArrayList<CommentItem> getComments() {
-        return comments;
-    }
-
-    public void setComments(ArrayList<CommentItem> comments) {
-        this.comments = comments;
     }
 
     public int getCheckCounts() {

@@ -13,16 +13,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.tao.wnc.model.domain.PostItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PostRepository {
 
     private static final String TAG = PostRepository.class.getName();
     private FirebaseDatabase db;
     private DatabaseReference ref;
-    private MutableLiveData<ArrayList<PostItem>> postsListLiveData;
-    private ArrayList<PostItem> postsList;
-    private MutableLiveData<ArrayList<PostItem>> myPostsListLiveData;
-    private ArrayList<PostItem> myPostsList;
+    private MutableLiveData<List<PostItem>> postsListLiveData;
+    private List<PostItem> postsList;
+    private MutableLiveData<List<PostItem>> myPostsListLiveData;
+    private List<PostItem> myPostsList;
 
     public PostRepository() {
         db = FirebaseDatabase.getInstance();
@@ -33,24 +34,29 @@ public class PostRepository {
         myPostsList = new ArrayList<>();
     }
 
-    public MutableLiveData<ArrayList<PostItem>> getPostsListLiveData() {
+    public MutableLiveData<List<PostItem>> getPostsListLiveData() {
         return postsListLiveData;
     }
 
-    public MutableLiveData<ArrayList<PostItem>> getMyPostsListLiveData() {
+    public MutableLiveData<List<PostItem>> getMyPostsListLiveData() {
         return myPostsListLiveData;
     }
 
     public void readPostsList() {
-        postsList.clear();
-        ref.child("posts").addValueEventListener(new ValueEventListener() {
+        if(postsList != null){
+            postsList.clear();
+        }
+        ref.child("posts").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot itemDataSnapshot : dataSnapshot.getChildren()) {
                     PostItem item = itemDataSnapshot.getValue(PostItem.class);
                     postsList.add(item);
                 }
-                postsListLiveData.setValue(postsList);
+                Log.d(TAG, Integer.toString(postsList.size()));
+                if(postsList != null && postsList.size() != 0){
+                    postsListLiveData.setValue(postsList);
+                }
             }
 
             @Override
