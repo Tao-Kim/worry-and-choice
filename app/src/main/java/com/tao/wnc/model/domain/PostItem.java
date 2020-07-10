@@ -4,7 +4,7 @@ public class PostItem {
     private String title;
     private String description;
     private String writer;
-    private String timeStamp;
+    private long timeStamp;
     private SelectItem selectA;
     private SelectItem selectB;
 
@@ -15,7 +15,7 @@ public class PostItem {
     public PostItem() {
     }
 
-    public PostItem(String title, String description, String writer, String timeStamp, SelectItem selectA, SelectItem selectB, Short selected){
+    public PostItem(String title, String description, String writer, long timeStamp, SelectItem selectA, SelectItem selectB, Short selected){
         this.title = title;
         this.description = description;
         this.writer = writer;
@@ -27,7 +27,7 @@ public class PostItem {
         commentCounts = 0;
     }
 
-    public PostItem(String title, String description, String writer, String timeStamp, SelectItem selectA, SelectItem selectB, short selected, int checkCounts, int commentCounts) {
+    public PostItem(String title, String description, String writer, long timeStamp, SelectItem selectA, SelectItem selectB, short selected, int checkCounts, int commentCounts) {
         this.title = title;
         this.description = description;
         this.writer = writer;
@@ -63,11 +63,11 @@ public class PostItem {
         this.writer = writer;
     }
 
-    public String getTimeStamp() {
+    public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
 

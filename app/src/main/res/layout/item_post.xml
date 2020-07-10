@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.tao.wnc.util.bindingTimeUtil"/>
         <import type="com.tao.wnc.util.Constants"/>
         <variable
             name="item"
@@ -63,7 +64,7 @@
                     android:id="@+id/tv_item_post_others"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{item.writer}"
+                    android:text="@{bindingTimeUtil.timeDifferenceWithUser(item.timeStamp,item.writer)}"
                     android:textColor="@color/wncGray"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"

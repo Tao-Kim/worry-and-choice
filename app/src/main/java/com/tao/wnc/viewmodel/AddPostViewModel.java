@@ -26,7 +26,7 @@ public class AddPostViewModel extends ViewModel {
 
     public void addItem(String title, String description, String selectAString, String selectBString) {
         String writer = user.getDisplayName();
-        String timeStamp =  Long.toString(System.currentTimeMillis());
+        long timeStamp =  System.currentTimeMillis();
         SelectItem selectA = new SelectItem(selectAString);
         SelectItem selectB = new SelectItem(selectBString);
         Short selected = Constants.SELECTED.NOT_SELECTED;
