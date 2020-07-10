@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 public class RegisterViewModel extends ViewModel {
 
     private static final String TAG = RegisterViewModel.class.getName();
-    private UserRepository repository;
+    private UserRepository userRepository;
     private FirebaseAuth auth;
     private SingleLiveEvent<Short> signInResultLiveData;
     private Observer<Short> dbObserver;
@@ -31,7 +31,7 @@ public class RegisterViewModel extends ViewModel {
 
     public RegisterViewModel() {
         auth = FirebaseAuth.getInstance();
-        repository = new UserRepository();
+        userRepository = new UserRepository();
         signInResultLiveData = new SingleLiveEvent<>();
         dbObserver = new Observer<Short>() {
             @Override
@@ -58,7 +58,7 @@ public class RegisterViewModel extends ViewModel {
                                             } else {
                                                 signInResultLiveData.setValue(Constants.AUTH.REGISTER_FAIL);
                                                 user.delete();
-                                                repository.deleteUser(name);
+                                                userRepository.deleteUser(name);
                                                 Log.e(TAG, task.getException().toString());
                                             }
                                         }
@@ -69,7 +69,7 @@ public class RegisterViewModel extends ViewModel {
                                         throw task.getException();
                                     } catch (Exception e) {
                                         signInResultLiveData.setValue(Constants.AUTH.REGISTER_FAIL);
-                                        repository.deleteUser(name);
+                                        userRepository.deleteUser(name);
                                         Log.w(TAG, e.toString());
                                     }
                                 }
@@ -79,7 +79,7 @@ public class RegisterViewModel extends ViewModel {
                 }
             }
         };
-        repository.getResultCodeLiveData().observeForever(dbObserver);
+        userRepository.getResultCodeLiveData().observeForever(dbObserver);
     }
 
 //    public void delete(String name){
@@ -105,7 +105,7 @@ public class RegisterViewModel extends ViewModel {
             this.email = email;
             this.password = password;
             this.name = name;
-            repository.insertUser(name, email);
+            userRepository.insertUser(name, email);
         }
     }
 
@@ -128,7 +128,7 @@ public class RegisterViewModel extends ViewModel {
 
     @Override
     protected void onCleared() {
-        repository.getResultCodeLiveData().removeObserver(dbObserver);
+        userRepository.getResultCodeLiveData().removeObserver(dbObserver);
         super.onCleared();
     }
 }
