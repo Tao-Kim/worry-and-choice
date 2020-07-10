@@ -72,6 +72,7 @@ public class ListFragment extends Fragment {
         observePostsList();
 
         if(status == Constants.LIST_FRAGMENT_STATUS.NONE || status == Constants.LIST_FRAGMENT_STATUS.POST_ADDED){
+            showProgressBar();
             viewModel.renewalPostsList();
         }
     }
@@ -113,6 +114,7 @@ public class ListFragment extends Fragment {
             public void onChanged(ArrayList<PostItem> postItems) {
                 if(postItems != null){
                     adapter.setItems(postItems);
+                    hideProgressBar();
                 }
             }
         });
@@ -130,5 +132,12 @@ public class ListFragment extends Fragment {
         ((MainActivity) getActivity()).replaceWithBackStack(NotificationsFragment.newInstance());
     }
 
+    private void showProgressBar() {
+        //
+    }
+
+    private void hideProgressBar() {
+        //
+    }
 
 }
