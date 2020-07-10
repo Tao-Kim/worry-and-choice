@@ -7,12 +7,22 @@ public final class Constants {
         public static final short NOT_SELECTED = 101;
         public static final short A_SELECTED = 151;
         public static final short B_SELECTED = 152;
+
     }
 
+    // LIST_FRAGMENT 상태관련
     public final class LIST_FRAGMENT_STATUS {
         public static final short NONE = 200;
         public static final short CREATED = 201;
         public static final short POST_ADDED = 202;
+    }
+
+    // READ_POST SELECT 관련
+    public final class SELECT {
+        public static final short WRITER_A = 301;
+        public static final short WRITER_B = 302;
+        public static final short OTHER_A = 303;
+        public static final short OTHER_B = 304;
     }
 
     // AUTH 관련 결과코드
@@ -46,6 +56,7 @@ public final class Constants {
         public static final short INSERT_USER_FAIL = 2101;
         public static final short INSERT_USER_FAIL_EXIST_NAME = 2102;
         public static final short INSERT_USER_FAIL_EXIST_EMAIL = 2103;
+
     }
 
 }

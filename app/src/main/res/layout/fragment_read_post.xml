@@ -4,6 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.tao.wnc.util.Constants" />
+
+        <import type="com.tao.wnc.util.bindingUtil" />
+
+        <variable
+            name="user"
+            type="String" />
+
+        <variable
+            name="item"
+            type="com.tao.wnc.model.domain.PostItem" />
+
         <variable
             name="fragment"
             type="com.tao.wnc.view.fragment.ReadPostFragment" />
@@ -37,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/read_post_title_dissatisfied"
+                android:text="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? @string/read_post_title_dissatisfied : @string/read_post_title_satisfied}"
                 android:textColor="@color/wncWhite"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -62,12 +77,12 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginVertical="10dp"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbarThumbVertical="@color/wnc28Orange"
             app:layout_constraintBottom_toTopOf="@id/container_read_post_send"
             app:layout_constraintTop_toBottomOf="@id/container_read_post_nav"
-            app:layout_constraintVertical_bias="0.0"
-            android:layout_marginVertical="10dp">
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -86,39 +101,61 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="고민이에요"
-                        android:textColor="@color/wncWhite"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@{@string/read_post_writer_select(item.writer, ((item.selected == Constants.SELECTED.A_SELECTED)? item.selectA.name: item.selectB.name))}"
+                        android:textColor="@color/wncOrange"
+                        android:visibility="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintBottom_toTopOf="@id/container_read_post_title_main"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
-                        android:id="@+id/ib_read_post_delete"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="?android:selectableItemBackground"
-                        android:onClick="@{fragment::onRefreshClick}"
-                        android:scaleType="centerCrop"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/container_read_post_title_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_delete" />
+                        app:layout_constraintStart_toStartOf="parent">
 
-                    <ImageButton
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginHorizontal="7dp"
-                        android:background="?android:selectableItemBackground"
-                        android:onClick="@{fragment::onRefreshClick}"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/ib_read_post_delete"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_edit" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@{item.title}"
+                            android:textColor="@color/wncWhite"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/ib_read_post_delete"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:background="?android:selectableItemBackground"
+                            android:onClick="@{fragment::onDeleteClick}"
+                            android:scaleType="centerCrop"
+                            android:visibility="@{(user == item.writer) ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_delete" />
+
+                        <ImageButton
+                            android:id="@+id/ib_read_post_edit"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginHorizontal="7dp"
+                            android:background="?android:selectableItemBackground"
+                            android:onClick="@{fragment::onEditClick}"
+                            android:scaleType="centerCrop"
+                            android:visibility="@{(user == item.writer) ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ib_read_post_delete"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_edit" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
@@ -141,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:paddingHorizontal="15dp"
-                    android:text="신발을 사려는데 무슨색을 살까요?"
+                    android:text="@{item.description}"
                     android:textColor="@color/wncLightGray"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -160,27 +197,29 @@
 
 
                     <LinearLayout
-                        android:focusable="true"
-                        android:clickable="true"
+                        android:id="@+id/container_read_post_select_a"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_item45"
+                        android:background="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? ((item.mySelected == Constants.SELECTED.NOT_SELECTED) ? @drawable/bg_item60 : @drawable/bg_item28 ) : ((item.selected == Constants.SELECTED.A_SELECTED) ? @drawable/bg_item45_orange : @drawable/bg_item28) }"
+                        android:clickable="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? ((item.mySelected == Constants.SELECTED.NOT_SELECTED) ? true : false ) : false }"
+                        android:focusable="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? ((item.mySelected == Constants.SELECTED.NOT_SELECTED) ? true : false ) : false }"
                         android:gravity="center"
+                        android:onClick="@{fragment::onSelectAClick}"
                         android:orientation="vertical"
                         android:paddingVertical="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="흰색"
+                            android:text="@{item.selectA.name}"
                             android:textColor="@color/wncWhite"
                             android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1명의 선택"
+                            android:text="@{bindingUtil.selectCount(item.selectA.count)}"
                             android:textColor="@color/wncLightGray"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -190,27 +229,29 @@
                         android:layout_height="match_parent" />
 
                     <LinearLayout
-                        android:focusable="true"
-                        android:clickable="true"
+                        android:id="@+id/container_read_post_select_b"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_item45"
+                        android:background="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? ((item.mySelected == Constants.SELECTED.NOT_SELECTED) ? @drawable/bg_item60 : @drawable/bg_item28 ) : ((item.selected == Constants.SELECTED.B_SELECTED) ? @drawable/bg_item45_orange : @drawable/bg_item28) }"
+                        android:clickable="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? ((item.mySelected == Constants.SELECTED.NOT_SELECTED) ? true : false ) : false }"
+                        android:focusable="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? ((item.mySelected == Constants.SELECTED.NOT_SELECTED) ? true : false ) : false }"
                         android:gravity="center"
+                        android:onClick="@{fragment::onSelectBClick}"
                         android:orientation="vertical"
                         android:paddingVertical="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="파란색"
+                            android:text="@{item.selectB.name}"
                             android:textColor="@color/wncWhite"
                             android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0명의 선택"
+                            android:text="@{bindingUtil.selectCount(item.selectB.count)"
                             android:textColor="@color/wncLightGray"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -240,7 +281,7 @@
                         android:id="@+id/tv_read_post_check_counts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1"
+                        android:text="@{Integer.toString(item.checkCounts)}"
                         android:textColor="@color/wncRed"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -264,7 +305,7 @@
                         android:id="@+id/tv_read_post_comment_counts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@{Integer.toString(item.commentCounts)}"
                         android:textColor="@color/wncBlue"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -275,12 +316,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="30분전 | 타오"
+                        android:text="@{bindingUtil.timeDifferenceWithUser(item.timeStamp, item.writer)"
                         android:textColor="@color/wncGray"
                         android:textSize="11sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="SmallSp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -300,48 +342,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="9dp"
+            android:background="@drawable/bg_item45"
             android:paddingVertical="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/bg_item45">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="15dp"
+                android:background="@color/wncNone"
                 android:hint="@string/read_post_comment_hint"
                 android:imeActionLabel="@string/ime_send"
                 android:imeOptions="actionSend"
                 android:inputType="text"
+                android:onClick="@{fragment::onRefreshClick}"
+                android:paddingHorizontal="15dp"
                 android:selectAllOnFocus="true"
                 android:textColor="@color/wncWhite"
                 android:textColorHint="@color/wncLightGray"
                 android:textSize="13sp"
-                android:background="@color/wncNone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_read_post_send"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:onClick="@{fragment::onRefreshClick}"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_read_post_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
-                android:paddingVertical="7dp"
+                android:background="@drawable/bg_item45"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingHorizontal="12dp"
+                android:paddingVertical="7dp"
                 android:text="@string/ime_send"
                 android:textColor="@color/wncWhite"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@drawable/bg_item45"
-                android:clickable="true"
-                android:focusable="true"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,6 +32,6 @@ public class AddPostViewModel extends ViewModel {
         Short selected = Constants.SELECTED.NOT_SELECTED;
 
         PostItem item = new PostItem(title, description, writer, timeStamp, selectA, selectB, selected);
-        postRepository.insertPost(item);
+        postRepository.insertPost(item, user.getDisplayName());
     }
 }

@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class SingleLiveEvent<T> extends MutableLiveData<T> {
+public class SingleLiveEvent<T> extends androidx.lifecycle.MutableLiveData<T> {
 
     private static final String TAG = "SingleLiveEvent";
 

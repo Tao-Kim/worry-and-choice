@@ -93,7 +93,7 @@ public class ListFragment extends Fragment {
             @Override
             public void onItemClick(PostItem item, int position) {
                 super.onItemClick(item, position);
-                ((MainActivity) getActivity()).replaceWithBackStack(ReadPostFragment.newInstance());
+                ((MainActivity) getActivity()).replaceWithBackStack(ReadPostFragment.newInstance(item.getPostId()));
             }
         };
         recyclerView.setAdapter(adapter);

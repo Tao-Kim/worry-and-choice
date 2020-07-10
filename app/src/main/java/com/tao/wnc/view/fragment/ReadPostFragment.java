@@ -1,6 +1,7 @@
 package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.R;
+import com.tao.wnc.databinding.FragmentReadPostBinding;
+import com.tao.wnc.model.domain.PostItem;
+import com.tao.wnc.util.Constants;
 import com.tao.wnc.view.activity.MainActivity;
 import com.tao.wnc.view.adapter.CommentListAdapter;
-import com.tao.wnc.databinding.FragmentReadPostBinding;
 import com.tao.wnc.viewmodel.ReadPostViewModel;
 
 /**
@@ -29,13 +35,19 @@ public class ReadPostFragment extends Fragment {
     private FragmentReadPostBinding binding;
     private ReadPostViewModel viewModel;
     private CommentListAdapter adapter;
+    private FirebaseUser user;
+    private boolean isMyPost = false;
 
     public ReadPostFragment() {
         // Required empty public constructor
     }
 
-    public static ReadPostFragment newInstance() {
-        return new ReadPostFragment();
+    public static ReadPostFragment newInstance(String postId) {
+        ReadPostFragment readPostFragment = new ReadPostFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("id", postId);
+        readPostFragment.setArguments(bundle);
+        return readPostFragment;
     }
 
     @Override
@@ -58,11 +70,41 @@ public class ReadPostFragment extends Fragment {
 
         return binding.getRoot();
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = new ViewModelProvider(this, getDefaultViewModelProviderFactory()).get(ReadPostViewModel.class);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        observePostItem();
+        loadPostItem();
+
         getList();
+    }
+
+    private void observePostItem() {
+        viewModel.getPostItemLiveData().observe(getViewLifecycleOwner(), new Observer<PostItem>() {
+            @Override
+            public void onChanged(PostItem postItem) {
+
+
+                Log.d("test", Integer.toString(postItem.getMySelected()));
+
+                String writer = postItem.getWriter();
+                if (writer.equals(user.getDisplayName())) {
+                    isMyPost = true;
+                }
+                binding.setUser(user.getDisplayName());
+                binding.setItem(postItem);
+            }
+        });
+    }
+
+    private void loadPostItem() {
+        Bundle bundle = getArguments();
+        String postId = bundle.getString("id");
+        viewModel.readPost(postId);
     }
 
     @Override
@@ -73,7 +115,7 @@ public class ReadPostFragment extends Fragment {
         viewModel = null;
     }
 
-    private void getList(){
+    private void getList() {
         adapter.setItems(viewModel.getListItems());
     }
 
@@ -82,6 +124,30 @@ public class ReadPostFragment extends Fragment {
     }
 
     public void onRefreshClick(View v) {
+        viewModel.reloadPost();
+    }
 
+    public void onDeleteClick(View v) {
+
+    }
+
+    public void onEditClick(View v) {
+
+    }
+
+    public void onSelectAClick(View v) {
+        if (isMyPost) {
+            viewModel.select(Constants.SELECT.WRITER_A);
+        } else {
+            viewModel.select(Constants.SELECT.OTHER_A);
+        }
+    }
+
+    public void onSelectBClick(View v) {
+        if (isMyPost) {
+            viewModel.select(Constants.SELECT.WRITER_B);
+        } else {
+            viewModel.select(Constants.SELECT.OTHER_B);
+        }
     }
 }

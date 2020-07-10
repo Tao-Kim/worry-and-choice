@@ -1,6 +1,7 @@
 package com.tao.wnc.model.domain;
 
 public class PostItem {
+    private String postId;
     private String title;
     private String description;
     private String writer;
@@ -9,6 +10,7 @@ public class PostItem {
     private SelectItem selectB;
 
     private int selected;
+    private int mySelected;
     private int checkCounts;
     private int commentCounts;
 
@@ -37,6 +39,14 @@ public class PostItem {
         this.selected = selected;
         this.checkCounts = checkCounts;
         this.commentCounts = commentCounts;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     public String getTitle() {
@@ -93,6 +103,14 @@ public class PostItem {
 
     public void setSelected(int selected) {
         this.selected = selected;
+    }
+
+    public int getMySelected() {
+        return mySelected;
+    }
+
+    public void setMySelected(int mySelected) {
+        this.mySelected = mySelected;
     }
 
     public int getCheckCounts() {

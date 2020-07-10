@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.tao.wnc.util.bindingTimeUtil"/>
-        <import type="com.tao.wnc.util.Constants"/>
+
+        <import type="com.tao.wnc.util.bindingUtil" />
+
+        <import type="com.tao.wnc.util.Constants" />
+
         <variable
             name="item"
             type="com.tao.wnc.model.domain.PostItem" />
     </data>
 
     <LinearLayout
-        android:focusable="true"
-        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="8dp"
         android:background="@drawable/bg_item28"
+        android:clickable="true"
+        android:focusable="true"
         android:paddingHorizontal="10dp"
         android:paddingVertical="6dp">
 
@@ -58,13 +61,13 @@
                     android:textColor="@color/wncLightGray"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_item_post_title"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_item_post_title" />
 
                 <TextView
                     android:id="@+id/tv_item_post_others"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{bindingTimeUtil.timeDifferenceWithUser(item.timeStamp,item.writer)}"
+                    android:text="@{bindingUtil.timeDifferenceWithUser(item.timeStamp,item.writer)}"
                     android:textColor="@color/wncGray"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -73,56 +76,56 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_item_post_sentiment"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/container_item_post_counts"
-                    android:src="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? @drawable/ic_sentiment_dissatisfied : @drawable/ic_sentiment_very_satisfied}"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_item_post_sentiment"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:scaleType="centerCrop"
+                android:src="@{(item.selected == Constants.SELECTED.NOT_SELECTED) ? @drawable/ic_sentiment_dissatisfied : @drawable/ic_sentiment_very_satisfied}"
+                app:layout_constraintBottom_toTopOf="@id/container_item_post_counts"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
-                    android:id="@+id/container_item_post_counts"
+            <LinearLayout
+                android:id="@+id/container_item_post_counts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_check_red" />
+
+                <TextView
+                    android:id="@+id/tv_item_post_check_counts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    android:text="@{Integer.toString(item.checkCounts)}"
+                    android:textColor="@color/wncRed"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
 
-                    <ImageView
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_check_red" />
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_chat" />
 
-                    <TextView
-                        android:id="@+id/tv_item_post_check_counts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{Integer.toString(item.checkCounts)}"
-                        android:textColor="@color/wncRed"
-                        android:textSize="10sp"
-                        tools:ignore="SmallSp" />
-
-                    <ImageView
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:layout_marginStart="3dp"
-                        android:layout_marginLeft="3dp"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_chat" />
-
-                    <TextView
-                        android:id="@+id/tv_item_post_comment_counts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{Integer.toString(item.commentCounts)}"
-                        android:textColor="@color/wncBlue"
-                        android:textSize="10sp"
-                        tools:ignore="SmallSp" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_item_post_comment_counts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{Integer.toString(item.commentCounts)}"
+                    android:textColor="@color/wncBlue"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

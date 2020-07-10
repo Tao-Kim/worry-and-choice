@@ -47,6 +47,8 @@
     <string name="read_post_title_satisfied">선택했어요!</string>
     <string name="read_post_comment_hint">댓글을 남겨주세요</string>
 
+    <string name="read_post_writer_select">%1$s의 선택 - %2$s</string>
+
     <!-- Strings related to notifications -->
     <string name="notifications_title">알림이에요</string>
 

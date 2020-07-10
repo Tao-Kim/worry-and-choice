@@ -3,6 +3,7 @@ package com.tao.wnc.viewmodel;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
@@ -23,7 +24,7 @@ public class RegisterViewModel extends ViewModel {
     private static final String TAG = RegisterViewModel.class.getName();
     private UserRepository userRepository;
     private FirebaseAuth auth;
-    private SingleLiveEvent<Short> signInResultLiveData;
+    private MutableLiveData<Short> signInResultLiveData;
     private Observer<Short> dbObserver;
     private String email;
     private String password;
@@ -88,7 +89,7 @@ public class RegisterViewModel extends ViewModel {
 //        repository.deleteUser(name);
 //    }
 
-    public SingleLiveEvent<Short> getSignInResultLiveData() {
+    public MutableLiveData<Short> getSignInResultLiveData() {
         return signInResultLiveData;
     }
 

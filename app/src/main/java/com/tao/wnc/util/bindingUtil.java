@@ -1,6 +1,6 @@
 package com.tao.wnc.util;
 
-public class bindingTimeUtil {
+public class bindingUtil {
 
     private static long currentTime;
 
@@ -39,4 +39,11 @@ public class bindingTimeUtil {
         return timeDifference(time) + " | " + userName;
     }
 
+    public static String selectCount(int count){
+        return Integer.toString(count) + "명의 선택";
+    }
+
+    public static String selectCountWithUser(int count, short mySelected){
+        return Integer.toString(count) + "명과 나의 선택";
+    }
 }

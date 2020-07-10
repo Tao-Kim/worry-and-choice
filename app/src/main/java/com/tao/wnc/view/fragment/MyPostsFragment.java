@@ -86,7 +86,7 @@ public class MyPostsFragment extends Fragment {
     }
 
     public void onReadPostClick(View v){
-        ((MainActivity)getActivity()).replaceWithBackStack(ReadPostFragment.newInstance());
+        //((MainActivity)getActivity()).replaceWithBackStack(ReadPostFragment.newInstance());
     }
 
 }
