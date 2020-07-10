@@ -9,6 +9,12 @@ public final class Constants {
         public static final short B_SELECTED = 152;
     }
 
+    public final class LIST_FRAGMENT_STATUS {
+        public static final short NONE = 200;
+        public static final short CREATED = 201;
+        public static final short POST_ADDED = 202;
+    }
+
     // AUTH 관련 결과코드
     public final class AUTH {
 

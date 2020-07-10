@@ -13,6 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.tao.wnc.model.domain.PostItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PostRepository {
@@ -55,6 +56,7 @@ public class PostRepository {
                 }
                 Log.d(TAG, Integer.toString(postsList.size()));
                 if(postsList != null && postsList.size() != 0){
+                    Collections.reverse(postsList);
                     postsListLiveData.setValue(postsList);
                 }
             }

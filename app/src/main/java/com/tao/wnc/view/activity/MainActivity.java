@@ -8,11 +8,23 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.tao.wnc.R;
+import com.tao.wnc.util.Constants;
 import com.tao.wnc.view.fragment.ListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
 
+    private short statusCode = Constants.LIST_FRAGMENT_STATUS.NONE;
+
+    public short getStatusCode() {
+        short returnStatusCode = statusCode;
+        statusCode = Constants.LIST_FRAGMENT_STATUS.CREATED;
+        return returnStatusCode;
+    }
+
+    public void setStatusCode(short statusCode) {
+        this.statusCode = statusCode;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

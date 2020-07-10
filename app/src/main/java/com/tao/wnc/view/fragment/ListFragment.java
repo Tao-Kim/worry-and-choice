@@ -20,6 +20,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentListBinding;
 import com.tao.wnc.model.domain.PostItem;
+import com.tao.wnc.util.Constants;
 import com.tao.wnc.view.activity.MainActivity;
 import com.tao.wnc.view.adapter.PostListAdapter;
 import com.tao.wnc.viewmodel.ListViewModel;
@@ -32,6 +33,8 @@ public class ListFragment extends Fragment {
     private FragmentListBinding binding;
     private ListViewModel viewModel;
     private PostListAdapter adapter;
+    private RecyclerView recyclerView;
+    private short status;
 
     public ListFragment() {
         // Required empty public constructor
@@ -47,13 +50,42 @@ public class ListFragment extends Fragment {
         initToken();
     }
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false);
         binding.setFragment(this);
 
-        RecyclerView recyclerView = binding.rvList;
+        initRecyclerView();
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        status = ((MainActivity)getActivity()).getStatusCode();
+
+        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        observePostsList();
+
+        if(status == Constants.LIST_FRAGMENT_STATUS.NONE || status == Constants.LIST_FRAGMENT_STATUS.POST_ADDED){
+            viewModel.renewalPostsList();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        adapter = null;
+        viewModel = null;
+    }
+
+    private void initRecyclerView(){
+        recyclerView = binding.rvList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         adapter = new PostListAdapter(){
@@ -64,24 +96,6 @@ public class ListFragment extends Fragment {
             }
         };
         recyclerView.setAdapter(adapter);
-
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        observePostsList();
-        viewModel.renewalPostsList();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-        adapter = null;
-        viewModel = null;
     }
 
     private void initToken(){

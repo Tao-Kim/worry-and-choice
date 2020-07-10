@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentAddPostBinding;
+import com.tao.wnc.util.Constants;
 import com.tao.wnc.view.activity.MainActivity;
 import com.tao.wnc.viewmodel.AddPostViewModel;
 
@@ -70,6 +71,7 @@ public class AddPostFragment extends Fragment {
                 binding.edtAddPostDescription.getText().toString(),
                 binding.edtAddPostSelectA.getText().toString(),
                 binding.edtAddPostSelectB.getText().toString());
+        ((MainActivity)getActivity()).setStatusCode(Constants.LIST_FRAGMENT_STATUS.POST_ADDED);
         ((MainActivity)getActivity()).removeAndPop(this);
     }
 
