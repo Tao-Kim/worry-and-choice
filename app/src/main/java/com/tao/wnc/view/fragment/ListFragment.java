@@ -66,7 +66,7 @@ public class ListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        status = ((MainActivity)getActivity()).getStatusCode();
+        status = ((MainActivity)getActivity()).getListFragmentStatusCode();
 
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         observePostsList();

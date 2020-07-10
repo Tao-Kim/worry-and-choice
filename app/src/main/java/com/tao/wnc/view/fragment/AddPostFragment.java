@@ -71,7 +71,7 @@ public class AddPostFragment extends Fragment {
                 binding.edtAddPostDescription.getText().toString(),
                 binding.edtAddPostSelectA.getText().toString(),
                 binding.edtAddPostSelectB.getText().toString());
-        ((MainActivity)getActivity()).setStatusCode(Constants.LIST_FRAGMENT_STATUS.POST_ADDED);
+        ((MainActivity)getActivity()).setListFragmentStatusCode(Constants.LIST_FRAGMENT_STATUS.POST_ADDED);
         ((MainActivity)getActivity()).removeAndPop(this);
     }
 

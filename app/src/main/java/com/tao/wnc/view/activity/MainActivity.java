@@ -14,16 +14,16 @@ import com.tao.wnc.view.fragment.ListFragment;
 public class MainActivity extends AppCompatActivity {
 
 
-    private short statusCode = Constants.LIST_FRAGMENT_STATUS.NONE;
+    private short listFragmentStatusCode = Constants.LIST_FRAGMENT_STATUS.NONE;
 
-    public short getStatusCode() {
-        short returnStatusCode = statusCode;
-        statusCode = Constants.LIST_FRAGMENT_STATUS.CREATED;
+    public short getListFragmentStatusCode() {
+        short returnStatusCode = listFragmentStatusCode;
+        listFragmentStatusCode = Constants.LIST_FRAGMENT_STATUS.CREATED;
         return returnStatusCode;
     }
 
-    public void setStatusCode(short statusCode) {
-        this.statusCode = statusCode;
+    public void setListFragmentStatusCode(short listFragmentStatusCode) {
+        this.listFragmentStatusCode = listFragmentStatusCode;
     }
 
     @Override
