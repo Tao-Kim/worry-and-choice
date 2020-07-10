@@ -7,6 +7,10 @@
         <variable
             name="item"
             type="com.tao.wnc.model.domain.PostItem" />
+
+        <variable
+            name="constants"
+            type="com.tao.wnc.util.BindingConstants"/>
     </data>
 
     <LinearLayout
@@ -62,7 +66,7 @@
                     android:id="@+id/tv_item_post_others"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{item.others}"
+                    android:text="@{item.writer}"
                     android:textColor="@color/wncGray"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +83,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/container_item_post_counts"
-                    android:src="@{item.selected ? @drawable/ic_sentiment_very_satisfied : @drawable/ic_sentiment_dissatisfied}"/>
+                    android:src="@{(item.selected == constants.NOT_SELECTED) ? @drawable/ic_sentiment_dissatisfied : @drawable/ic_sentiment_very_satisfied}"/>
 
                 <LinearLayout
                     android:id="@+id/container_item_post_counts"

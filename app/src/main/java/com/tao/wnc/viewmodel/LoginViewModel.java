@@ -21,6 +21,7 @@ public class LoginViewModel extends ViewModel {
     private SingleLiveEvent<Short> loginResultLiveData;
 
     public LoginViewModel() {
+        Log.d(TAG, "LoginViewModel Constructor!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         auth = FirebaseAuth.getInstance();
         loginResultLiveData = new SingleLiveEvent<>();
     }
@@ -58,5 +59,11 @@ public class LoginViewModel extends ViewModel {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onCleared() {
+        Log.d(TAG, "LoginViewModel onCleared!!!!!!!!!!!!!!!!!!!!!");
+        super.onCleared();
     }
 }

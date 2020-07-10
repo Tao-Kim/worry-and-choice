@@ -1,11 +1,14 @@
 package com.tao.wnc.viewmodel;
 
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.model.domain.PostItem;
+import com.tao.wnc.model.repository.PostRepository;
 import com.tao.wnc.model.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -13,71 +16,41 @@ import java.util.ArrayList;
 public class ListViewModel extends ViewModel {
 
     private final static String TAG = ListViewModel.class.getName();
-    private ArrayList<PostItem> items;
+    private FirebaseUser user;
     private UserRepository userRepository;
+    private PostRepository postRepository;
+    private MutableLiveData<ArrayList<PostItem>> postsListLiveData;
+    private ArrayList<PostItem> postsList;
+
 
     public ListViewModel() {
-        items = new ArrayList<>();
-        setTestDataSet();
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
         userRepository = new UserRepository();
+        postRepository = new PostRepository();
+        postsListLiveData = new MutableLiveData<>();
+        observeRepositoryPostsList();
+    }
+
+    public MutableLiveData<ArrayList<PostItem>> getPostsListLiveData() {
+        return postsListLiveData;
     }
 
     public void setDataBaseToken(String deviceToken) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String name = user.getDisplayName();
         userRepository.insertOrModifyUserToken(name, deviceToken);
     }
 
-    public ArrayList<PostItem> getListItems() {
-        return items;
+    private void observeRepositoryPostsList() {
+        postRepository.getPostsListLiveData().observeForever(new Observer<ArrayList<PostItem>>() {
+            @Override
+            public void onChanged(ArrayList<PostItem> postItems) {
+                postsList.addAll(postItems);
+            }
+        });
     }
 
-    private void setTestDataSet() {
-        PostItem item = new PostItem("치킨",
-                "치킨을 먹으려는데 무슨 치킨을 먹어야 할까요 너무 많아서 고민이에요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ",
-                "30분전 | 아유",
-                false,
-                1,
-                0);
-        items.add(item);
-
-        PostItem item2 = new PostItem("고민이에요",
-                "신발을 사려는데 무슨색을 살까요?",
-                "50분전 | 타오",
-                false,
-                1,
-                0);
-        items.add(item2);
-
-        PostItem item3 = new PostItem("무슨 알바를 할까요?",
-                "피시방알바와 편의점알바 자리가 있는데 어떤 알바를 하는게 더 좋을까요? 추천 부탁해요!!!!!!!!!!!!!",
-                "2시간전 | 아유",
-                true,
-                14,
-                12);
-        items.add(item3);
-
-        PostItem item4 = new PostItem("TEST",
-                "teset",
-                "0시간전 | 타오",
-                true,
-                0,
-                0);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
-        items.add(item4);
+    public void renewalPostsList() {
+        postsList.clear();
+        postRepository.readPostsList();
     }
 }

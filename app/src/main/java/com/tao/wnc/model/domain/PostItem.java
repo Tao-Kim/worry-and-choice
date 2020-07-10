@@ -15,6 +15,9 @@ public class PostItem {
     private int checkCounts;
     private int commentCounts;
 
+    public PostItem(){
+
+    }
 
     public PostItem(String title, String description, String writer, String timeStamp, SelectItem selectA, SelectItem selectB, Short selected){
         this.title = title;

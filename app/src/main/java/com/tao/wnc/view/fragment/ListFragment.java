@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,8 @@ import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.view.activity.MainActivity;
 import com.tao.wnc.view.adapter.PostListAdapter;
 import com.tao.wnc.viewmodel.ListViewModel;
+
+import java.util.ArrayList;
 
 
 public class ListFragment extends Fragment {
@@ -41,6 +44,9 @@ public class ListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initToken();
+        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        observePostsList();
     }
 
     @Override
@@ -67,9 +73,7 @@ public class ListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initToken();
-        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        getList();
+        viewModel.renewalPostsList();
     }
 
     @Override
@@ -89,11 +93,16 @@ public class ListFragment extends Fragment {
             }
         });
     }
-
-    private void getList(){
-        adapter.setItems(viewModel.getListItems());
+    private void observePostsList() {
+        viewModel.getPostsListLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<PostItem>>() {
+            @Override
+            public void onChanged(ArrayList<PostItem> postItems) {
+                if(postItems != null){
+                    adapter.setItems(postItems);
+                }
+            }
+        });
     }
-
 
     public void onMyPostsClick(View v) {
         ((MainActivity) getActivity()).replaceWithBackStack(MyPostsFragment.newInstance());

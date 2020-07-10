@@ -18,8 +18,6 @@ public class AddPostViewModel extends ViewModel {
     private PostRepository postRepository;
 
 
-
-
     public AddPostViewModel() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         userRepository = new UserRepository();
@@ -28,7 +26,7 @@ public class AddPostViewModel extends ViewModel {
 
     public void addItem(String title, String description, String selectAString, String selectBString) {
         String writer = user.getDisplayName();
-        String timeStamp = null;
+        String timeStamp =  Long.toString(System.currentTimeMillis());
         SelectItem selectA = new SelectItem(selectAString);
         SelectItem selectB = new SelectItem(selectBString);
         Short selected = Constants.SELECTED.NOT_SELECTED;

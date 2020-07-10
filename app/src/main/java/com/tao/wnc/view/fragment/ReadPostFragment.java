@@ -61,7 +61,7 @@ public class ReadPostFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ReadPostViewModel.class);
+        viewModel = new ViewModelProvider(this, getDefaultViewModelProviderFactory()).get(ReadPostViewModel.class);
         getList();
     }
 
