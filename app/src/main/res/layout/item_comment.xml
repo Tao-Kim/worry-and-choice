@@ -63,7 +63,7 @@
                     android:id="@+id/iv_comment_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.time}"
+                    android:text="@{item.setTimeStamp}"
                     android:textSize="11sp"
                     android:textColor="@color/wncGray"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -20,6 +20,8 @@ import com.tao.wnc.view.activity.MainActivity;
  */
 public class AddPostFragment extends Fragment {
 
+    private FragmentAddPostBinding binding;
+
     public AddPostFragment() {
         // Required empty public constructor
     }
@@ -35,7 +37,7 @@ public class AddPostFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentAddPostBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_post, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_post, container, false);
         binding.setFragment(this);
 
         return binding.getRoot();

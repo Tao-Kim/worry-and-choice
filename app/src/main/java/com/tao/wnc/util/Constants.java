@@ -2,6 +2,12 @@ package com.tao.wnc.util;
 
 public final class Constants {
 
+    // POSTITEM SELECTED 관련
+    public final class SELECTED {
+        public static final short NOT_SELECTED = 101;
+        public static final short A_SELECTED = 151;
+        public static final short B_SELECTED = 152;
+    }
 
     // AUTH 관련 결과코드
     public final class AUTH {
@@ -35,4 +41,5 @@ public final class Constants {
         public static final short INSERT_USER_FAIL_EXIST_NAME = 2102;
         public static final short INSERT_USER_FAIL_EXIST_EMAIL = 2103;
     }
+
 }

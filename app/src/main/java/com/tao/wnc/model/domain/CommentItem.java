@@ -1,22 +1,22 @@
 package com.tao.wnc.model.domain;
 
 public class CommentItem {
-    private String name;
+    private String userName;
     private String message;
-    private String time;
+    private String timeStamp;
 
-    public CommentItem(String name, String message, String time) {
-        this.name = name;
+    public CommentItem(String userName, String message, String timeStamp) {
+        this.userName = userName;
         this.message = message;
-        this.time = time;
+        this.timeStamp = timeStamp;
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String userName) {
+        this.userName = userName;
     }
 
     public String getMessage() {
@@ -27,11 +27,11 @@ public class CommentItem {
         this.message = message;
     }
 
-    public String getTime() {
-        return time;
+    public String getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }
