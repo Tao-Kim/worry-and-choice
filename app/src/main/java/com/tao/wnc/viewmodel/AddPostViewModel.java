@@ -7,20 +7,17 @@ import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.model.domain.SelectItem;
 import com.tao.wnc.model.repository.PostRepository;
-import com.tao.wnc.model.repository.UserRepository;
 import com.tao.wnc.util.Constants;
 
 public class AddPostViewModel extends ViewModel {
 
     private final static String TAG = AddPostViewModel.class.getName();
     private FirebaseUser user;
-    private UserRepository userRepository;
     private PostRepository postRepository;
 
 
     public AddPostViewModel() {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        userRepository = new UserRepository();
         postRepository = new PostRepository();
     }
 
@@ -32,6 +29,6 @@ public class AddPostViewModel extends ViewModel {
         Short selected = Constants.SELECTED.NOT_SELECTED;
 
         PostItem item = new PostItem(title, description, writer, timeStamp, selectA, selectB, selected);
-        postRepository.insertPost(item, user.getDisplayName());
+        postRepository.insertPost(item);
     }
 }

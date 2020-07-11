@@ -14,7 +14,7 @@ public final class Constants {
     public final class LIST_FRAGMENT_STATUS {
         public static final short NONE = 200;
         public static final short CREATED = 201;
-        public static final short POST_ADDED = 202;
+        public static final short CHANGED = 202;
     }
 
     // READ_POST SELECT 관련

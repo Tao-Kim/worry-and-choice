@@ -128,7 +128,9 @@ public class ReadPostFragment extends Fragment {
     }
 
     public void onDeleteClick(View v) {
-
+        viewModel.deletePost();
+        ((MainActivity)getActivity()).setListFragmentStatusCode(Constants.LIST_FRAGMENT_STATUS.CHANGED);
+        ((MainActivity) getActivity()).removeAndPop(this);
     }
 
     public void onEditClick(View v) {

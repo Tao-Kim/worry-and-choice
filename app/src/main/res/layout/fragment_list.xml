@@ -63,6 +63,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
+                android:id="@+id/ib_list_notifications"
                 android:layout_width="31dp"
                 android:layout_height="31dp"
                 android:onClick="@{fragment::onNotificationsClick}"
@@ -71,6 +72,17 @@
                 android:background="?android:selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/ib_list_my"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:onClick="@{fragment::onRefreshClick}"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_refresh"
+                android:background="?android:selectableItemBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ib_list_notifications"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

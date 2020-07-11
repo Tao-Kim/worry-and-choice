@@ -3,10 +3,8 @@ package com.tao.wnc.model.repository;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -110,32 +108,9 @@ public class PostRepository {
 
     }
 
-    public void insertPost(PostItem item, String userName) {
+    public void insertPost(PostItem item) {
         final String postId = ref.child("posts").push().getKey();
         ref.child("posts").child(postId).setValue(item);
-        ref.child("users").orderByChild("name").equalTo(userName).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ref.child("users").child(dataSnapshot.getKey()).child("posts").push().setValue(postId);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e(TAG, databaseError.toString());
-            }
-        });
     }
 
     public void readPost(final String postId, final String userName) {
@@ -209,17 +184,16 @@ public class PostRepository {
                     Log.w(TAG, databaseError.toString());
                 }
             });
-
         }
+    }
 
-
+    public void deletePost(String postId) {
+        ref.child("posts").child(postId).setValue(null);
     }
 
     public void modifyPost() {
 
     }
 
-    public void deletePost() {
 
-    }
 }

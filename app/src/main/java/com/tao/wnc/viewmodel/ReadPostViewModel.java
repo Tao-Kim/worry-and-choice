@@ -56,6 +56,14 @@ public class ReadPostViewModel extends ViewModel {
         postRepository.readPost(postId, user.getDisplayName());
     }
 
+    public void deletePost() {
+        postRepository.deletePost(postId);
+    }
+
+    public void editPost(){
+
+    }
+
     public void select(final short SELECT) {
         postRepository.modifySelect(SELECT, postId, user.getDisplayName());
         postRepository.getDoneLiveData().observeForever(new Observer<Boolean>() {

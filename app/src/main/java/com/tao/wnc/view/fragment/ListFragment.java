@@ -71,7 +71,7 @@ public class ListFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         observePostsList();
 
-        if(status == Constants.LIST_FRAGMENT_STATUS.NONE || status == Constants.LIST_FRAGMENT_STATUS.POST_ADDED){
+        if(status == Constants.LIST_FRAGMENT_STATUS.NONE || status == Constants.LIST_FRAGMENT_STATUS.CHANGED){
             showProgressBar();
             viewModel.renewalPostsList();
         }
@@ -130,6 +130,11 @@ public class ListFragment extends Fragment {
 
     public void onNotificationsClick(View v) {
         ((MainActivity) getActivity()).replaceWithBackStack(NotificationsFragment.newInstance());
+    }
+
+    public void onRefreshClick(View v){
+        showProgressBar();
+        viewModel.renewalPostsList();
     }
 
     private void showProgressBar() {
