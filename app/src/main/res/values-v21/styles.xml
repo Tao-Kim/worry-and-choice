@@ -7,5 +7,6 @@
         <item name="colorPrimaryDark">@color/wncIndigo</item>
         <item name="colorAccent">@color/wncOrange</item>
         <item name="android:colorControlHighlight">@color/wnc28Orange</item>
+        <item name="android:windowBackground">@drawable/bg_load</item>
     </style>
 </resources>
