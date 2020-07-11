@@ -43,7 +43,7 @@ public class bindingUtil {
         return Integer.toString(count) + "명의 선택";
     }
 
-    public static String selectCountWithUser(int count, short mySelected){
+    public static String selectCountWithMe(int count){
         return Integer.toString(count) + "명과 나의 선택";
     }
 }

@@ -221,7 +221,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{bindingUtil.selectCount(item.selectA.count)}"
+                            android:text="@{(item.mySelected == Constants.SELECTED.A_SELECTED) ? bindingUtil.selectCountWithMe(item.selectA.count) : bindingUtil.selectCount(item.selectA.count)}"
                             android:textColor="@color/wncLightGray"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -252,7 +252,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{bindingUtil.selectCount(item.selectB.count)}"
+                            android:text="@{(item.mySelected == Constants.SELECTED.B_SELECTED) ? bindingUtil.selectCountWithMe(item.selectB.count) : bindingUtil.selectCount(item.selectB.count)}"
                             android:textColor="@color/wncLightGray"
                             android:textSize="12sp" />
                     </LinearLayout>
