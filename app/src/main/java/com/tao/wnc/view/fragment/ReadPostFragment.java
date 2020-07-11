@@ -142,6 +142,7 @@ public class ReadPostFragment extends Fragment {
     public void onRefreshClick(View v) {
         viewModel.reloadPost(postId);
         viewModel.renewalCommentList(postId);
+        binding.svReadPost.scrollTo(0, 0);
     }
 
     public void onDeleteClick(View v) {

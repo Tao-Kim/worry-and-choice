@@ -22,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getWindow().setBackgroundDrawableResource(R.drawable.bg_main);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.login_container, LoginFragment.newInstance()).commit();
     }
@@ -32,13 +34,16 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    public void removeAndPop(Fragment fragment){
+    public void removeAndPop(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().remove(fragment).commit();
         fragmentManager.popBackStack();
+        fragmentManager.beginTransaction().remove(fragment).commit();
     }
 
-//    public void replaceRegisterFragment(){
-//        getSupportFragmentManager().beginTransaction().replace(R.id.login_container, RegisterFragment.newInstance()).addToBackStack(null).commit();
-//    }
+    public void replaceWithBackStack(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_right, R.anim.out_left, R.anim.enter_left, R.anim.out_right)
+                .replace(R.id.login_container, fragment)
+                .addToBackStack(null).commit();
+    }
 }

@@ -139,6 +139,7 @@ public class ListFragment extends Fragment {
     public void onRefreshClick(View v){
         showProgressBar();
         viewModel.renewalPostsList();
+        recyclerView.getLayoutManager().scrollToPosition(0);
     }
 
     private void showProgressBar() {

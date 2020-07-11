@@ -75,12 +75,8 @@ public class LoginFragment extends Fragment {
         Glide.with(this).asGif().load(R.raw.login_background).into(binding.loginIvBackground);
     }
 
-    private void setKeyboardListener(){
-
-    }
-
     public void onRegisterClick(View v) {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.login_container, RegisterFragment.newInstance()).addToBackStack(null).commit();
+        ((LoginActivity)getActivity()).replaceWithBackStack(RegisterFragment.newInstance());
     }
 
     public void onLoginClick(View v) {

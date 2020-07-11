@@ -1,6 +1,7 @@
 package com.tao.wnc.view.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -37,14 +38,20 @@ public class MainActivity extends AppCompatActivity {
         transaction.add(R.id.main_container, ListFragment.newInstance()).commit();
     }
 
-    public void removeAndPop(Fragment fragment){
+    public void removeAndPop(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().remove(fragment).commit();
         fragmentManager.popBackStack();
+        fragmentManager.beginTransaction().remove(fragment).commit();
+        Log.d("test", Integer.toString(fragmentManager.getFragments().size()));
     }
 
-    public void replaceWithBackStack(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).addToBackStack(null).commit();
+    public void replaceWithBackStack(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_right, R.anim.out_left, R.anim.enter_left, R.anim.out_right)
+                .replace(R.id.main_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

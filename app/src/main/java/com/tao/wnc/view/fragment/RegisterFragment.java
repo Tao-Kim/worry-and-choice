@@ -46,6 +46,7 @@ public class RegisterFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false);
         binding.setFragment(this);
 
+
         return binding.getRoot();
     }
 

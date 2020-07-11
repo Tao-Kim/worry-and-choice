@@ -116,6 +116,7 @@ public class MyPostsFragment extends Fragment {
     public void onRefreshClick(View v) {
         showProgressBar();
         viewModel.renewalMyPostsList();
+        recyclerView.getLayoutManager().scrollToPosition(0);
     }
 
 
