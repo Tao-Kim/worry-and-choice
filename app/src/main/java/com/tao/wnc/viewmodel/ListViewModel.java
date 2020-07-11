@@ -22,6 +22,7 @@ public class ListViewModel extends ViewModel {
     private PostRepository postRepository;
     private MutableLiveData<ArrayList<PostItem>> postsListLiveData;
     private ArrayList<PostItem> postsList = new ArrayList<>();
+    private Observer<List<PostItem>> postListObserver;
 
 
     public ListViewModel() {
@@ -42,18 +43,19 @@ public class ListViewModel extends ViewModel {
     }
 
     private void observeRepositoryPostsList() {
-        postRepository.getPostsListLiveData().observeForever(new Observer<List<PostItem>>() {
+        postListObserver = new Observer<List<PostItem>>() {
             @Override
             public void onChanged(List<PostItem> postItems) {
                 if (postItems != null && postItems.size() != 0) {
-                    for(PostItem post : postItems){
+                    for (PostItem post : postItems) {
                         postsList.add(post);
                     }
                     postsListLiveData.setValue(postsList);
                 }
 
             }
-        });
+        };
+        postRepository.getPostsListLiveData().observeForever(postListObserver);
     }
 
     public void renewalPostsList() {
@@ -61,5 +63,11 @@ public class ListViewModel extends ViewModel {
             postsList.clear();
         }
         postRepository.readPostsList();
+    }
+
+    @Override
+    protected void onCleared() {
+        postRepository.getPostsListLiveData().removeObserver(postListObserver);
+        super.onCleared();
     }
 }

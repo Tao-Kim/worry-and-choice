@@ -9,10 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentAddPostBinding;
+import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.util.Constants;
 import com.tao.wnc.view.activity.MainActivity;
 import com.tao.wnc.viewmodel.AddPostViewModel;
@@ -26,6 +28,7 @@ public class AddPostFragment extends Fragment {
 
     private FragmentAddPostBinding binding;
     private AddPostViewModel viewModel;
+    private String postId;
 
     public AddPostFragment() {
         // Required empty public constructor
@@ -36,7 +39,11 @@ public class AddPostFragment extends Fragment {
     }
 
     public static AddPostFragment newInstance(String postId){
-        return  new AddPostFragment();
+        AddPostFragment addPostFragment = new AddPostFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("id", postId);
+        addPostFragment.setArguments(bundle);
+        return addPostFragment;
     }
 
     @Override
@@ -56,6 +63,8 @@ public class AddPostFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(AddPostViewModel.class);
+
+        checkEditPost();
     }
 
     @Override
@@ -65,17 +74,47 @@ public class AddPostFragment extends Fragment {
         viewModel = null;
     }
 
+    private void checkEditPost(){
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            postId = bundle.getString("id");
+            observePostItem();
+            loadPostItem();
+        }
+    }
+
+    private void observePostItem(){
+        viewModel.getPostItemLiveData().observe(getViewLifecycleOwner(), new Observer<PostItem>() {
+            @Override
+            public void onChanged(PostItem postItem) {
+                binding.setItem(postItem);
+            }
+        });
+    }
+
+    private void loadPostItem() {
+        viewModel.readPost(postId);
+    }
+
     public void onBackClick(View v){
         ((MainActivity)getActivity()).removeAndPop(this);
     }
 
     public void onDoneClick(View v) {
         showProgressBar();
-        viewModel.addItem(binding.edtAddPostTitle.getText().toString(),
-                binding.edtAddPostDescription.getText().toString(),
-                binding.edtAddPostSelectA.getText().toString(),
-                binding.edtAddPostSelectB.getText().toString());
-        ((MainActivity)getActivity()).setListFragmentStatusCode(Constants.LIST_FRAGMENT_STATUS.CHANGED);
+        if(postId != null){
+            viewModel.editItem(postId,
+                    binding.edtAddPostTitle.getText().toString(),
+                    binding.edtAddPostDescription.getText().toString(),
+                    binding.edtAddPostSelectA.getText().toString(),
+                    binding.edtAddPostSelectB.getText().toString());
+        } else {
+            viewModel.addItem(binding.edtAddPostTitle.getText().toString(),
+                    binding.edtAddPostDescription.getText().toString(),
+                    binding.edtAddPostSelectA.getText().toString(),
+                    binding.edtAddPostSelectB.getText().toString());
+            ((MainActivity)getActivity()).setListFragmentStatusCode(Constants.LIST_FRAGMENT_STATUS.CHANGED);
+        }
         ((MainActivity)getActivity()).removeAndPop(this);
     }
 

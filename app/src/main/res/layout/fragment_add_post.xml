@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="item"
+            type="com.tao.wnc.model.domain.PostItem" />
+
+        <variable
             name="fragment"
             type="com.tao.wnc.view.fragment.AddPostFragment" />
     </data>
@@ -39,7 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/add_post_title"
+                android:text="@{(item == null) ? @string/add_post_title : @string/add_post_edit_title}"
                 android:textColor="@color/wncWhite"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -67,9 +71,9 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="25dp"
             android:background="@drawable/bg_item28"
-            android:paddingVertical="15dp"
-            android:paddingHorizontal="15dp"
             android:orientation="vertical"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="15dp"
             app:layout_constraintBottom_toTopOf="@id/container_add_post_select"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,11 +84,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/wncNone"
-                android:hint="제목"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:hint="@string/add_post_post_title_hint"
+                android:text="@{(item == null) ? null : item.title}"
                 android:textColor="@color/wncWhite"
-                android:textColorHint="@color/wnc28White"/>
+                android:textColorHint="@color/wnc28White"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <View
                 android:id="@+id/hr_read_post_title"
                 android:layout_width="match_parent"
@@ -97,12 +103,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:gravity="top"
                 android:background="@color/wncNone"
-                android:hint="내용"
-                android:textSize="14sp"
+                android:gravity="top"
+                android:hint="@string/add_post_post_description_hint"
+                android:text="@{(item == null) ? null : item.description}"
                 android:textColor="@color/wncWhite"
-                android:textColorHint="@color/wnc28White"/>
+                android:textColorHint="@color/wnc28White"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -129,7 +136,12 @@
                     android:layout_height="match_parent"
                     android:background="@color/wncNone"
                     android:gravity="center"
-                    android:hint="선택A"
+                    android:hint="@string/add_post_select_a_hint"
+                    android:imeActionLabel="@string/ime_next"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="@{(item == null) ? null : item.selectA.name}"
                     android:textColor="@color/wncWhite"
                     android:textColorHint="@color/wnc28White" />
             </LinearLayout>
@@ -151,7 +163,11 @@
                     android:layout_height="match_parent"
                     android:background="@color/wncNone"
                     android:gravity="center"
-                    android:hint="선택B"
+                    android:hint="@string/add_post_select_b_hint"
+                    android:imeActionLabel="@string/ime_done"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:text="@{(item == null) ? null : item.selectB.name}"
                     android:textColor="@color/wncWhite"
                     android:textColorHint="@color/wnc28White" />
             </LinearLayout>

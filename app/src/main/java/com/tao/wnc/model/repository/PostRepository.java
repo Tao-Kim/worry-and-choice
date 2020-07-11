@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tao.wnc.model.domain.CommentItem;
 import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.util.Constants;
 import com.tao.wnc.util.SingleLiveEvent;
@@ -28,6 +29,8 @@ public class PostRepository {
     private MutableLiveData<List<PostItem>> myPostsListLiveData;
     private List<PostItem> myPostsList;
     private MutableLiveData<PostItem> postItemLiveData;
+    private List<CommentItem> commentList;
+    private MutableLiveData<List<CommentItem>> commentListLiveData;
     private SingleLiveEvent<Boolean> doneLiveData;
 
     public PostRepository() {
@@ -38,6 +41,8 @@ public class PostRepository {
         myPostsListLiveData = new MutableLiveData<>();
         myPostsList = new ArrayList<>();
         postItemLiveData = new MutableLiveData<>();
+        commentList = new ArrayList<>();
+        commentListLiveData = new MutableLiveData<>();
         doneLiveData = new SingleLiveEvent<>();
     }
 
@@ -51,6 +56,10 @@ public class PostRepository {
 
     public MutableLiveData<PostItem> getPostItemLiveData() {
         return postItemLiveData;
+    }
+
+    public MutableLiveData<List<CommentItem>> getCommentListLiveData() {
+        return commentListLiveData;
     }
 
     public MutableLiveData<Boolean> getDoneLiveData() {
@@ -83,7 +92,7 @@ public class PostRepository {
     }
 
     public void readMyPostsList(String userName) {
-        if (myPostsList.size() != 0 ) {
+        if (myPostsList.size() != 0) {
             myPostsList.clear();
         }
         ref.child("posts").orderByChild("writer").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -109,8 +118,33 @@ public class PostRepository {
     }
 
     public void insertPost(PostItem item) {
-        final String postId = ref.child("posts").push().getKey();
-        ref.child("posts").child(postId).setValue(item);
+        ref.child("posts").push().setValue(item);
+    }
+
+    public void modifyPost(String postId, String title, String description, String selectAString, String selectBString) {
+        ref.child("posts").child(postId).child("title").setValue(title);
+        ref.child("posts").child(postId).child("description").setValue(description);
+        ref.child("posts").child(postId).child("selectA").child("name").setValue(selectAString);
+        ref.child("posts").child(postId).child("selectB").child("name").setValue(selectBString);
+    }
+
+    public void deletePost(String postId) {
+        ref.child("posts").child(postId).setValue(null);
+    }
+
+    public void readPost(final String postId) {
+        ref.child("posts").child(postId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                PostItem item = dataSnapshot.getValue(PostItem.class);
+                postItemLiveData.setValue(item);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, databaseError.toString());
+            }
+        });
     }
 
     public void readPost(final String postId, final String userName) {
@@ -186,14 +220,28 @@ public class PostRepository {
             });
         }
     }
+    public void readCommentList(String postId){
+        ref.child("posts").child(postId).child("comments").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot commentDataSnapshot : dataSnapshot.getChildren()) {
+                    CommentItem item = commentDataSnapshot.getValue(CommentItem.class);
+                    commentList.add(item);
+                }
+                if (commentList != null && commentList.size() != 0) {
+                    commentListLiveData.setValue(commentList);
+                }
+            }
 
-    public void deletePost(String postId) {
-        ref.child("posts").child(postId).setValue(null);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, databaseError.toString());
+            }
+        });
     }
 
-    public void modifyPost() {
-
+    public void insertComment(String postId, CommentItem item){
+        ref.child("posts").child(postId).child("comments").push().setValue(item);
     }
-
 
 }

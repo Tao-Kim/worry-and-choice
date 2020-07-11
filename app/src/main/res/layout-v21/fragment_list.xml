@@ -80,7 +80,7 @@
                 android:onClick="@{fragment::onRefreshClick}"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_refresh"
-                android:background="?android:selectableItemBackground"
+                android:background="?android:selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/ib_list_notifications"
                 app:layout_constraintTop_toTopOf="parent" />

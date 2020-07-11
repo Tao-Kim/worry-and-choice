@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.tao.wnc.util.bindingUtil"/>
         <variable
             name="item"
             type="com.tao.wnc.model.domain.CommentItem" />
@@ -63,7 +64,7 @@
                     android:id="@+id/iv_comment_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.timeStamp}"
+                    android:text="@{bindingUtil.timeDifference(item.timeStamp)}"
                     android:textSize="11sp"
                     android:textColor="@color/wncGray"
                     app:layout_constraintEnd_toEndOf="parent"
