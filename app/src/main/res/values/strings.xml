@@ -47,6 +47,8 @@
     <string name="read_post_title_satisfied">선택했어요!</string>
     <string name="read_post_comment_hint">댓글을 남겨주세요</string>
 
+    <string name="read_post_send_comment_null">댓글을 입력해주세요</string>
+
     <string name="read_post_writer_select">%1$s의 선택 - %2$s</string>
 
     <!-- Strings related to notifications -->
@@ -59,5 +61,10 @@
     <string name="add_post_post_description_hint">내용</string>
     <string name="add_post_select_a_hint">선택A</string>
     <string name="add_post_select_b_hint">선택B</string>
+
+    <string name="add_post_send_title_null">제목을 입력해주세요</string>
+    <string name="add_post_send_description_null">내용을 입력해주세요</string>
+    <string name="add_post_send_select_a_null">선택A를 입력해주세요</string>
+    <string name="add_post_send_select_b_null">선택B를 입력해주세요</string>
 
 </resources>

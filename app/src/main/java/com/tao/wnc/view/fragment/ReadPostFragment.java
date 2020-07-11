@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.coder.zzq.smartshow.toast.SmartToast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.R;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
  * Use the {@link ReadPostFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReadPostFragment extends Fragment {
+public class ReadPostFragment extends BaseFragment {
 
     private FragmentReadPostBinding binding;
     private ReadPostViewModel viewModel;
@@ -109,7 +110,7 @@ public class ReadPostFragment extends Fragment {
                 }
                 binding.setUser(user.getDisplayName());
                 binding.setItem(postItem);
-                hiddeProgressBar();
+                hideProgressBar();
             }
         });
     }
@@ -120,13 +121,14 @@ public class ReadPostFragment extends Fragment {
             public void onChanged(ArrayList<CommentItem> commentItems) {
                 if(commentItems.size() != 0){
                     adapter.setItems(commentItems);
-                    hiddeProgressBar();
+                    hideProgressBar();
                 }
             }
         });
     }
 
     private void loadPost() {
+        //showProgressBar();
         Bundle bundle = getArguments();
         postId = bundle.getString("id");
         viewModel.readPost(postId);
@@ -139,6 +141,7 @@ public class ReadPostFragment extends Fragment {
     }
 
     public void onRefreshClick(View v) {
+        showProgressBar();
         viewModel.reloadPost();
         binding.svReadPost.scrollTo(0, 0);
     }
@@ -154,6 +157,7 @@ public class ReadPostFragment extends Fragment {
     }
 
     public void onSelectAClick(View v) {
+        showProgressBar();
         if (isMyPost) {
             viewModel.select(Constants.SELECT.WRITER_A);
         } else {
@@ -162,6 +166,7 @@ public class ReadPostFragment extends Fragment {
     }
 
     public void onSelectBClick(View v) {
+        showProgressBar();
         if (isMyPost) {
             viewModel.select(Constants.SELECT.WRITER_B);
         } else {
@@ -170,15 +175,14 @@ public class ReadPostFragment extends Fragment {
     }
 
     public void onCommentSendClick(View v){
-        viewModel.sendComment(binding.edtReadPostComment.getText().toString());
-        binding.edtReadPostComment.setText("");
+        showProgressBar();
+        String commentString = binding.edtReadPostComment.getText().toString();
+        if(commentString.length() == 0){
+            SmartToast.emotion().backgroundColorRes(R.color.wnc28White).apply().fail(R.string.read_post_send_comment_null);
+        } else {
+            viewModel.sendComment(binding.edtReadPostComment.getText().toString());
+            binding.edtReadPostComment.setText("");
+        }
     }
 
-    private void showProgressBar(){
-
-    }
-
-    private void hiddeProgressBar(){
-
-    }
 }

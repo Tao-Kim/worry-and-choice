@@ -1,7 +1,6 @@
 package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
  * Use the {@link MyPostsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyPostsFragment extends Fragment {
+public class MyPostsFragment extends BaseFragment {
 
     private FragmentMyPostsBinding binding;
     private MyPostsViewModel viewModel;
@@ -101,7 +100,6 @@ public class MyPostsFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<PostItem> postItems) {
                 if (postItems != null) {
-                    Log.d("test", Integer.toString(postItems.size()));
                     adapter.setItems(postItems);
                     hideProgressBar();
                 }
@@ -117,15 +115,6 @@ public class MyPostsFragment extends Fragment {
         showProgressBar();
         viewModel.renewalMyPostsList();
         recyclerView.getLayoutManager().scrollToPosition(0);
-    }
-
-
-    private void showProgressBar() {
-        //
-    }
-
-    private void hideProgressBar() {
-        //
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.coder.zzq.smartshow.core.SmartShow;
 import com.tao.wnc.R;
 import com.tao.wnc.view.fragment.LoginFragment;
 
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getWindow().setBackgroundDrawableResource(R.drawable.bg_main);
+        SmartShow.init(getApplication());
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.login_container, LoginFragment.newInstance()).commit();

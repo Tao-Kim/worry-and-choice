@@ -34,4 +34,6 @@
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_color"
         android:resource="@color/wncIndigo" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 </manifest>

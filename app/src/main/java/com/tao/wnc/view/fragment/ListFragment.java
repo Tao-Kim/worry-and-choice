@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,7 +29,7 @@ import java.util.ArrayList;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 
-public class ListFragment extends Fragment {
+public class ListFragment extends BaseFragment {
 
     private FragmentListBinding binding;
     private ListViewModel viewModel;
@@ -136,14 +135,6 @@ public class ListFragment extends Fragment {
         showProgressBar();
         viewModel.renewalPostsList();
         recyclerView.getLayoutManager().scrollToPosition(0);
-    }
-
-    private void showProgressBar() {
-        //
-    }
-
-    private void hideProgressBar() {
-        //
     }
 
 }

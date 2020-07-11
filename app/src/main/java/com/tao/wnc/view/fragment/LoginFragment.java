@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -14,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.coder.zzq.smartshow.toast.SmartToast;
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentLoginBinding;
 import com.tao.wnc.util.Constants;
@@ -25,9 +25,9 @@ import com.tao.wnc.viewmodel.LoginViewModel;
  * Use the {@link LoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFragment {
 
-    private final static String TAG = LoginActivity.class.getName();
+    private final static String TAG = LoginFragment.class.getName();
     private FragmentLoginBinding binding;
     private LoginViewModel viewModel;
 
@@ -93,30 +93,29 @@ public class LoginFragment extends Fragment {
                     hideProgressBar();
 
                     if (resultCode == Constants.AUTH.LOGIN_SUCCESS) {
-                        Log.d(TAG, "login success");
                         ((LoginActivity) getActivity()).goMainActivity();
 
                     } else if (resultCode == Constants.AUTH.LOGIN_FAIL_WRONG_EMAIL) {
                         binding.edtLoginEmail.requestFocus();
-                        Toast.makeText(getContext(), R.string.login_result_wrong_email, Toast.LENGTH_SHORT).show();
+                        SmartToast.emotion().backgroundColorRes(R.color.wnc28White).apply().fail(R.string.login_result_wrong_email);
 
                     } else if (resultCode == Constants.AUTH.LOGIN_FAIL_WRONG_PASSWORD) {
                         binding.edtLoginPassword.requestFocus();
-                        Toast.makeText(getContext(), R.string.login_result_wrong_password, Toast.LENGTH_SHORT).show();
+                        SmartToast.emotion().backgroundColorRes(R.color.wnc28White).apply().fail(R.string.login_result_wrong_password);
 
                     } else if (resultCode == Constants.AUTH.LOGIN_FAIL_NULL_EMAIL) {
                         binding.edtLoginEmail.requestFocus();
-                        Toast.makeText(getContext(), R.string.login_result_wrong_email, Toast.LENGTH_SHORT).show();
+                        SmartToast.emotion().backgroundColorRes(R.color.wnc28White).apply().fail(R.string.login_result_null_email);
 
                     } else if (resultCode == Constants.AUTH.LOGIN_FAIL_NULL_PASSWORD) {
                         binding.edtLoginPassword.requestFocus();
-                        Toast.makeText(getContext(), R.string.login_result_wrong_password, Toast.LENGTH_SHORT).show();
+                        SmartToast.emotion().backgroundColorRes(R.color.wnc28White).apply().fail(R.string.login_result_null_password);
 
                     } else if (resultCode == Constants.AUTH.LOGIN_FAIL) {
-                        Toast.makeText(getContext(), R.string.login_result_fail, Toast.LENGTH_SHORT).show();
+                        SmartToast.emotion().backgroundColorRes(R.color.wnc28White).apply().warning(R.string.login_result_fail);
 
                     } else {
-                        Toast.makeText(getContext(), R.string.login_result_fail, Toast.LENGTH_SHORT).show();
+                        SmartToast.emotion().backgroundColorRes(R.color.wnc28White).apply().error(R.string.login_result_fail);
                         Log.e(TAG, "unexpected resultCode");
                     }
                 }
@@ -124,11 +123,4 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    private void showProgressBar() {
-        //
-    }
-
-    private void hideProgressBar() {
-        //
-    }
 }
