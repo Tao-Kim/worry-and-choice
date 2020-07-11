@@ -38,7 +38,7 @@
                     android:lineSpacingExtra="7dp"
                     android:text="@string/login_logo"
                     android:textColor="@color/wncLogo"
-                    android:textSize="39sp"
+                    android:textSize="39dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,11 +114,13 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_login_login">
+                app:layout_constraintTop_toBottomOf="@id/btn_login_login"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="21dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/login_tv_guide_register"
                     android:textColor="@color/wncWhite"
                     android:textSize="14sp" />

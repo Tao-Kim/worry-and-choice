@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.model.domain.CommentItem;
 import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.model.repository.PostRepository;
+import com.tao.wnc.util.Constants;
 import com.tao.wnc.util.SingleLiveEvent;
 
 import java.util.ArrayList;
@@ -22,8 +23,9 @@ public class ReadPostViewModel extends ViewModel {
     private PostRepository postRepository;
     private FirebaseUser user;
     private Observer<PostItem> postItemObserver;
-    private Observer<Boolean> doneObserver;
+    private Observer<Short> doneObserver;
     private Observer<List<CommentItem>> commentListObserver;
+    private String postId;
 
     public ReadPostViewModel() {
         commentListLiveData = new MutableLiveData<>();
@@ -33,6 +35,7 @@ public class ReadPostViewModel extends ViewModel {
         user = FirebaseAuth.getInstance().getCurrentUser();
         observePostItem();
         observeCommentList();
+        observeDone();
     }
 
     public MutableLiveData<PostItem> getPostItemLiveData() {
@@ -69,38 +72,52 @@ public class ReadPostViewModel extends ViewModel {
         postRepository.getCommentListLiveData().observeForever(commentListObserver);
     }
 
+    private void observeDone() {
+        doneObserver = new Observer<Short>() {
+            @Override
+            public void onChanged(Short done) {
+               if(done == Constants.DB.DONE_SELECT){
+                   renewalPostBody();
+               } else if (done == Constants.DB.DONE_SEND_COMMENT) {
+                   renewalPostBody();
+                   renewalCommentList();
+                }
+            }
+        };
+
+        postRepository.getDoneLiveData().observeForever(doneObserver);
+    }
+
     public void readPost(String postId) {
+        this.postId = postId;
         postRepository.readPost(postId, user.getDisplayName());
+        renewalCommentList();
     }
 
     public void deletePost(String postId) {
         postRepository.deletePost(postId);
     }
 
-    public void select(final short SELECT, final String postId) {
+    public void select(final short SELECT) {
         postRepository.modifySelect(SELECT, postId, user.getDisplayName());
-        doneObserver = new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean done) {
-                if (done) {
-                    reloadPost(postId);
-                    postRepository.getDoneLiveData().removeObserver(this);
-                }
-            }
-        };
-        postRepository.getDoneLiveData().observeForever(doneObserver);
+
     }
 
-    public void sendComment(String postId, String commentMessage){
+    public void sendComment(String commentMessage){
         CommentItem commentItem = new CommentItem(user.getDisplayName(), commentMessage, System.currentTimeMillis());
         postRepository.insertComment(postId, commentItem);
     }
 
-    public void reloadPost(String postId) {
+    public void reloadPost() {
+        renewalPostBody();
+        renewalCommentList();
+    }
+
+    private void renewalPostBody(){
         postRepository.readPost(postId, user.getDisplayName());
     }
 
-    public void renewalCommentList(String postId) {
+    private void renewalCommentList() {
         if (commentList.size() != 0) {
             commentList.clear();
         }
@@ -111,6 +128,7 @@ public class ReadPostViewModel extends ViewModel {
     protected void onCleared() {
         postRepository.getPostItemLiveData().removeObserver(postItemObserver);
         postRepository.getDoneLiveData().removeObserver(doneObserver);
+        postRepository.getCommentListLiveData().removeObserver(commentListObserver);
         super.onCleared();
     }
 }

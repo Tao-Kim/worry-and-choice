@@ -132,10 +132,6 @@ public class ListFragment extends Fragment {
         ((MainActivity) getActivity()).replaceWithBackStack(AddPostFragment.newInstance());
     }
 
-    public void onNotificationsClick(View v) {
-        ((MainActivity) getActivity()).replaceWithBackStack(NotificationsFragment.newInstance());
-    }
-
     public void onRefreshClick(View v){
         showProgressBar();
         viewModel.renewalPostsList();

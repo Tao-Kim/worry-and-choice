@@ -31,7 +31,7 @@ public class PostRepository {
     private MutableLiveData<PostItem> postItemLiveData;
     private List<CommentItem> commentList;
     private MutableLiveData<List<CommentItem>> commentListLiveData;
-    private SingleLiveEvent<Boolean> doneLiveData;
+    private SingleLiveEvent<Short> doneLiveData;
 
     public PostRepository() {
         db = FirebaseDatabase.getInstance();
@@ -62,7 +62,7 @@ public class PostRepository {
         return commentListLiveData;
     }
 
-    public MutableLiveData<Boolean> getDoneLiveData() {
+    public MutableLiveData<Short> getDoneLiveData() {
         return doneLiveData;
     }
 
@@ -189,10 +189,10 @@ public class PostRepository {
     public void modifySelect(final short SELECT, final String postId, final String userName) {
         if (SELECT == Constants.SELECT.WRITER_A) {
             ref.child("posts").child(postId).child("selected").setValue(new Integer(Constants.SELECTED.A_SELECTED));
-            doneLiveData.setValue(true);
+            doneLiveData.setValue(Constants.DB.DONE_SELECT);
         } else if (SELECT == Constants.SELECT.WRITER_B) {
             ref.child("posts").child(postId).child("selected").setValue(new Integer(Constants.SELECTED.B_SELECTED));
-            doneLiveData.setValue(true);
+            doneLiveData.setValue(Constants.DB.DONE_SELECT);
         } else {
             ref.child("posts").child(postId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -203,13 +203,13 @@ public class PostRepository {
                         ref.child("posts").child(postId).child("selectA").child("selectUsers").push().setValue(userName);
                         ref.child("posts").child(postId).child("selectA").child("count").setValue(selectACounts);
                         ref.child("posts").child(postId).child("checkCounts").setValue(checkCounts);
-                        doneLiveData.setValue(true);
+                        doneLiveData.setValue(Constants.DB.DONE_SELECT);
                     } else if (SELECT == Constants.SELECT.OTHER_B) {
                         long selectBCounts = ((long) dataSnapshot.child("selectB").child("count").getValue()) + 1;
                         ref.child("posts").child(postId).child("selectB").child("selectUsers").push().setValue(userName);
                         ref.child("posts").child(postId).child("selectB").child("count").setValue(selectBCounts);
                         ref.child("posts").child(postId).child("checkCounts").setValue(checkCounts);
-                        doneLiveData.setValue(true);
+                        doneLiveData.setValue(Constants.DB.DONE_SELECT);
                     }
                 }
 
@@ -220,8 +220,9 @@ public class PostRepository {
             });
         }
     }
-    public void readCommentList(String postId){
-        if(commentList.size() != 0){
+
+    public void readCommentList(String postId) {
+        if (commentList.size() != 0) {
             commentList.clear();
         }
         ref.child("posts").child(postId).child("comments").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -243,8 +244,21 @@ public class PostRepository {
         });
     }
 
-    public void insertComment(String postId, CommentItem item){
+    public void insertComment(String postId, CommentItem item) {
         ref.child("posts").child(postId).child("comments").push().setValue(item);
+        ref.child("posts").child(postId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long commentCounts = ((long) dataSnapshot.child("commentCounts").getValue()) + 1;
+                ref.child("posts").child(postId).child("commentCounts").setValue(commentCounts);
+                doneLiveData.setValue(Constants.DB.DONE_SEND_COMMENT);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, databaseError.toString());
+            }
+        });
     }
 
 }

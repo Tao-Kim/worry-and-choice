@@ -140,6 +140,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:maxLength="9"
                     android:text="@{(item == null) ? null : item.selectA.name}"
                     android:textColor="@color/wncWhite"
                     android:textColorHint="@color/wnc28White" />
@@ -166,6 +167,8 @@
                     android:imeActionLabel="@string/ime_done"
                     android:imeOptions="actionDone"
                     android:inputType="text"
+                    android:maxLines="1"
+                    android:maxLength="9"
                     android:text="@{(item == null) ? null : item.selectB.name}"
                     android:textColor="@color/wncWhite"
                     android:textColorHint="@color/wnc28White" />

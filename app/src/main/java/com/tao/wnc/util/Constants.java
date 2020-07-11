@@ -57,6 +57,10 @@ public final class Constants {
         public static final short INSERT_USER_FAIL_EXIST_NAME = 2102;
         public static final short INSERT_USER_FAIL_EXIST_EMAIL = 2103;
 
+        // DONE
+        public static final short DONE_SELECT = 2201;
+        public static final short DONE_SEND_COMMENT = 2202;
+
     }
 
 }

@@ -130,7 +130,6 @@ public class ReadPostFragment extends Fragment {
         Bundle bundle = getArguments();
         postId = bundle.getString("id");
         viewModel.readPost(postId);
-        viewModel.renewalCommentList(postId);
     }
 
 
@@ -140,8 +139,7 @@ public class ReadPostFragment extends Fragment {
     }
 
     public void onRefreshClick(View v) {
-        viewModel.reloadPost(postId);
-        viewModel.renewalCommentList(postId);
+        viewModel.reloadPost();
         binding.svReadPost.scrollTo(0, 0);
     }
 
@@ -157,23 +155,22 @@ public class ReadPostFragment extends Fragment {
 
     public void onSelectAClick(View v) {
         if (isMyPost) {
-            viewModel.select(Constants.SELECT.WRITER_A, postId);
+            viewModel.select(Constants.SELECT.WRITER_A);
         } else {
-            viewModel.select(Constants.SELECT.OTHER_A, postId);
+            viewModel.select(Constants.SELECT.OTHER_A);
         }
     }
 
     public void onSelectBClick(View v) {
         if (isMyPost) {
-            viewModel.select(Constants.SELECT.WRITER_B, postId);
+            viewModel.select(Constants.SELECT.WRITER_B);
         } else {
-            viewModel.select(Constants.SELECT.OTHER_B, postId);
+            viewModel.select(Constants.SELECT.OTHER_B);
         }
     }
 
     public void onCommentSendClick(View v){
-        viewModel.sendComment(postId, binding.edtReadPostComment.getText().toString());
-        viewModel.renewalCommentList(postId);
+        viewModel.sendComment(binding.edtReadPostComment.getText().toString());
         binding.edtReadPostComment.setText("");
     }
 
