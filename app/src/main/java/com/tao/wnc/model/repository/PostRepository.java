@@ -60,7 +60,7 @@ public class PostRepository {
     }
 
     public void readPostsList() {
-        if (postsList != null) {
+        if (postsList.size() != 0) {
             postsList.clear();
         }
         ref.child("posts").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -69,10 +69,8 @@ public class PostRepository {
                 for (DataSnapshot itemDataSnapshot : dataSnapshot.getChildren()) {
                     PostItem item = itemDataSnapshot.getValue(PostItem.class);
                     item.setPostId(itemDataSnapshot.getKey());
-                    Log.d(TAG, itemDataSnapshot.getKey());
                     postsList.add(item);
                 }
-                Log.d(TAG, Integer.toString(postsList.size()));
                 if (postsList != null && postsList.size() != 0) {
                     Collections.reverse(postsList);
                     postsListLiveData.setValue(postsList);
@@ -86,7 +84,29 @@ public class PostRepository {
         });
     }
 
-    public void readMyPostsList() {
+    public void readMyPostsList(String userName) {
+        if (myPostsList.size() != 0 ) {
+            myPostsList.clear();
+        }
+        ref.child("posts").orderByChild("writer").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot itemDataSnapshot : dataSnapshot.getChildren()) {
+                    PostItem item = itemDataSnapshot.getValue(PostItem.class);
+                    item.setPostId(itemDataSnapshot.getKey());
+                    myPostsList.add(item);
+                }
+                if (myPostsList != null && myPostsList.size() != 0) {
+                    Collections.reverse(myPostsList);
+                    myPostsListLiveData.setValue(myPostsList);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, databaseError.toString());
+            }
+        });
 
     }
 
@@ -152,7 +172,7 @@ public class PostRepository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG, databaseError.toString());
+                Log.w(TAG, databaseError.toString());
             }
         });
     }
@@ -186,7 +206,7 @@ public class PostRepository {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.d(TAG, databaseError.toString());
+                    Log.w(TAG, databaseError.toString());
                 }
             });
 

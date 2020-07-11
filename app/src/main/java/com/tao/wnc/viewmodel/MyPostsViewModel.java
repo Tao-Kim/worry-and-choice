@@ -1,26 +1,60 @@
 package com.tao.wnc.viewmodel;
 
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.model.domain.PostItem;
+import com.tao.wnc.model.repository.PostRepository;
+import com.tao.wnc.model.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyPostsViewModel extends ViewModel {
-    private ArrayList<PostItem> items;
+
+    private final static String TAG = MyPostsViewModel.class.getName();
+    private FirebaseUser user;
+    private UserRepository userRepository;
+    private PostRepository postRepository;
+    private MutableLiveData<ArrayList<PostItem>> myPostsListLiveData;
+    private ArrayList<PostItem> myPostsList = new ArrayList<>();
+
 
     public MyPostsViewModel() {
-        items = new ArrayList<>();
-        setTestDataSet();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userRepository = new UserRepository();
+        postRepository = new PostRepository();
+        myPostsListLiveData = new MutableLiveData<>();
+        observeRepositoryMyPostsList();
     }
 
-    public ArrayList<PostItem> getListItems() {
-
-        return items;
+    public MutableLiveData<ArrayList<PostItem>> getMyPostsListLiveData() {
+        return myPostsListLiveData;
     }
 
-    private void setTestDataSet() {
+    private void observeRepositoryMyPostsList() {
+        postRepository.getMyPostsListLiveData().observeForever(new Observer<List<PostItem>>() {
+            @Override
+            public void onChanged(List<PostItem> postItems) {
+                if (postItems != null && postItems.size() != 0) {
+                    for(PostItem post : postItems){
+                        myPostsList.add(post);
+                    }
+                    myPostsListLiveData.setValue(myPostsList);
+                }
 
+            }
+        });
+    }
+
+    public void renewalMyPostsList() {
+        if (myPostsList.size() != 0) {
+            myPostsList.clear();
+        }
+        postRepository.readMyPostsList(user.getDisplayName());
     }
 }

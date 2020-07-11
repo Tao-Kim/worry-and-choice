@@ -1,8 +1,6 @@
 package com.tao.wnc.viewmodel;
 
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -49,7 +47,6 @@ public class ListViewModel extends ViewModel {
             public void onChanged(List<PostItem> postItems) {
                 if (postItems != null && postItems.size() != 0) {
                     for(PostItem post : postItems){
-                        Log.d(TAG, post.getTitle());
                         postsList.add(post);
                     }
                     postsListLiveData.setValue(postsList);
@@ -60,7 +57,7 @@ public class ListViewModel extends ViewModel {
     }
 
     public void renewalPostsList() {
-        if (postsList != null) {
+        if (postsList.size() != 0) {
             postsList.clear();
         }
         postRepository.readPostsList();

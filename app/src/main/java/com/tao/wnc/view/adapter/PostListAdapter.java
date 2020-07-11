@@ -43,10 +43,11 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
         return items.size();
     }
 
-    public void setItems(ArrayList<PostItem> items){
+    public void setItems(ArrayList<PostItem> items) {
         this.items = items;
         notifyDataSetChanged();
     }
 
-    public void onItemClick(PostItem item, int position){}
+    public void onItemClick(PostItem item, int position) {
+    }
 }

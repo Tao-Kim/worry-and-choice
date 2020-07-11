@@ -112,7 +112,7 @@ public class ListFragment extends Fragment {
         viewModel.getPostsListLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<PostItem>>() {
             @Override
             public void onChanged(ArrayList<PostItem> postItems) {
-                if(postItems != null){
+                if(postItems.size() != 0){
                     adapter.setItems(postItems);
                     hideProgressBar();
                 }
