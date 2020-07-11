@@ -5,8 +5,7 @@
         <item name="colorPrimary">@color/wncDeepDarkOrange</item>
         <item name="colorPrimaryDark">@color/wncIndigo</item>
         <item name="colorAccent">@color/wncDeepDarkOrange</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@drawable/bg_load</item>
     </style>
 
 </resources>

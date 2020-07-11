@@ -99,8 +99,12 @@ public class MyPostsFragment extends BaseFragment {
         viewModel.getMyPostsListLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<PostItem>>() {
             @Override
             public void onChanged(ArrayList<PostItem> postItems) {
-                if (postItems != null) {
+                binding.containerListNone.setVisibility(View.GONE);
+                if (postItems != null && postItems.size() != 0) {
                     adapter.setItems(postItems);
+                    hideProgressBar();
+                } else {
+                    binding.containerListNone.setVisibility(View.VISIBLE);
                     hideProgressBar();
                 }
             }

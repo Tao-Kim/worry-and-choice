@@ -1,9 +1,11 @@
 package com.tao.wnc.view.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,6 +98,11 @@ public class AddPostFragment extends BaseFragment {
     }
 
     public void onDoneClick(View v) {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
         String title = binding.edtAddPostTitle.getText().toString();
         String description = binding.edtAddPostDescription.getText().toString();
         String selectA = binding.edtAddPostSelectA.getText().toString();

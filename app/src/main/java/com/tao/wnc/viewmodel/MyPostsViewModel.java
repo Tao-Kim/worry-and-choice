@@ -42,6 +42,8 @@ public class MyPostsViewModel extends ViewModel {
                         myPostsList.add(post);
                     }
                     myPostsListLiveData.setValue(myPostsList);
+                } else {
+                    myPostsListLiveData.setValue(null);
                 }
 
             }

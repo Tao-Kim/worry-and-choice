@@ -81,6 +81,8 @@ public class PostRepository {
                 if (postsList != null && postsList.size() != 0) {
                     Collections.reverse(postsList);
                     postsListLiveData.setValue(postsList);
+                } else {
+                    postsListLiveData.setValue(null);
                 }
             }
 
@@ -106,6 +108,8 @@ public class PostRepository {
                 if (myPostsList != null && myPostsList.size() != 0) {
                     Collections.reverse(myPostsList);
                     myPostsListLiveData.setValue(myPostsList);
+                } else {
+                    myPostsListLiveData.setValue(null);
                 }
             }
 
