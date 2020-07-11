@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.model.repository.PostRepository;
-import com.tao.wnc.model.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,6 @@ public class MyPostsViewModel extends ViewModel {
 
     private final static String TAG = MyPostsViewModel.class.getName();
     private FirebaseUser user;
-    private UserRepository userRepository;
     private PostRepository postRepository;
     private MutableLiveData<ArrayList<PostItem>> myPostsListLiveData;
     private ArrayList<PostItem> myPostsList = new ArrayList<>();
@@ -26,7 +24,6 @@ public class MyPostsViewModel extends ViewModel {
 
     public MyPostsViewModel() {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        userRepository = new UserRepository();
         postRepository = new PostRepository();
         myPostsListLiveData = new MutableLiveData<>();
         observeRepositoryMyPostsList();
@@ -62,6 +59,7 @@ public class MyPostsViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         postRepository.getMyPostsListLiveData().removeObserver(myPostsListObserver);
+        postRepository = null;
         super.onCleared();
     }
 }

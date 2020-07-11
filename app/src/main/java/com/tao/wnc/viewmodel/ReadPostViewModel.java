@@ -129,6 +129,7 @@ public class ReadPostViewModel extends ViewModel {
         postRepository.getPostItemLiveData().removeObserver(postItemObserver);
         postRepository.getDoneLiveData().removeObserver(doneObserver);
         postRepository.getCommentListLiveData().removeObserver(commentListObserver);
+        postRepository = null;
         super.onCleared();
     }
 }

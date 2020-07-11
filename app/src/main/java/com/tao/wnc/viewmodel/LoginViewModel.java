@@ -63,7 +63,6 @@ public class LoginViewModel extends ViewModel {
 
     @Override
     protected void onCleared() {
-        Log.d(TAG, "LoginViewModel onCleared!!!!!!!!!!!!!!!!!!!!!");
         super.onCleared();
     }
 }

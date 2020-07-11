@@ -83,12 +83,6 @@ public class RegisterViewModel extends ViewModel {
         userRepository.getResultCodeLiveData().observeForever(dbObserver);
     }
 
-//    public void delete(String name){
-//        FirebaseUser user = auth.getCurrentUser();
-//        user.delete();
-//        repository.deleteUser(name);
-//    }
-
     public MutableLiveData<Short> getSignInResultLiveData() {
         return signInResultLiveData;
     }
@@ -130,6 +124,7 @@ public class RegisterViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         userRepository.getResultCodeLiveData().removeObserver(dbObserver);
+        userRepository = null;
         super.onCleared();
     }
 }

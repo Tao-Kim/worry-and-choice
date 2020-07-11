@@ -63,6 +63,7 @@ public class AddPostViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         postRepository.getPostItemLiveData().removeObserver(postItemObserver);
+        postRepository = null;
         super.onCleared();
     }
 }

@@ -68,6 +68,8 @@ public class ListViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         postRepository.getPostsListLiveData().removeObserver(postListObserver);
+        userRepository =null;
+        postRepository = null;
         super.onCleared();
     }
 }
