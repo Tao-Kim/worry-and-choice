@@ -215,14 +215,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{item.selectA.name}"
-                            android:textColor="@color/wncWhite"
+                            android:textColor="@{(item.selected == Constants.SELECTED.A_SELECTED) ? @color/wncOrange : @color/wncWhite}"
                             android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{(item.mySelected == Constants.SELECTED.A_SELECTED) ? bindingUtil.selectCountWithMe(item.selectA.count) : bindingUtil.selectCount(item.selectA.count)}"
-                            android:textColor="@color/wncLightGray"
+                            android:textColor="@{(item.selected == Constants.SELECTED.A_SELECTED) ? @color/wncDarkOrange : @color/wncLightGray}"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -246,14 +246,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{item.selectB.name}"
-                            android:textColor="@color/wncWhite"
+                            android:textColor="@{(item.selected == Constants.SELECTED.B_SELECTED) ? @color/wncOrange : @color/wncWhite}"
                             android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{(item.mySelected == Constants.SELECTED.B_SELECTED) ? bindingUtil.selectCountWithMe(item.selectB.count) : bindingUtil.selectCount(item.selectB.count)}"
-                            android:textColor="@color/wncLightGray"
+                            android:textColor="@{(item.selected == Constants.SELECTED.B_SELECTED) ? @color/wncDarkOrange : @color/wncLightGray}"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
