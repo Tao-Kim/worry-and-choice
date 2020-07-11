@@ -27,6 +27,8 @@ import com.tao.wnc.viewmodel.ListViewModel;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+
 
 public class ListFragment extends Fragment {
 
@@ -96,7 +98,9 @@ public class ListFragment extends Fragment {
                 ((MainActivity) getActivity()).replaceWithBackStack(ReadPostFragment.newInstance(item.getPostId()));
             }
         };
-        recyclerView.setAdapter(adapter);
+        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
+        animationAdapter.setFirstOnly(false);
+        recyclerView.setAdapter(animationAdapter);
     }
 
     private void initToken(){

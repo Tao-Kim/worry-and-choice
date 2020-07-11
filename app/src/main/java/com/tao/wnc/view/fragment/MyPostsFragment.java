@@ -16,13 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.wnc.R;
+import com.tao.wnc.databinding.FragmentMyPostsBinding;
 import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.view.activity.MainActivity;
 import com.tao.wnc.view.adapter.PostListAdapter;
-import com.tao.wnc.databinding.FragmentMyPostsBinding;
 import com.tao.wnc.viewmodel.MyPostsViewModel;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,7 +91,9 @@ public class MyPostsFragment extends Fragment {
                 ((MainActivity) getActivity()).replaceWithBackStack(ReadPostFragment.newInstance(item.getPostId()));
             }
         };
-        recyclerView.setAdapter(adapter);
+        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
+        animationAdapter.setFirstOnly(false);
+        recyclerView.setAdapter(animationAdapter);
     }
 
     private void observeMyPostsList() {

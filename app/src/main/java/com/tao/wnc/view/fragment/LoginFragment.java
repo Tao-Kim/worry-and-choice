@@ -51,7 +51,7 @@ public class LoginFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         binding.setFragment(this);
 
-        initBackgroundImage();
+        setBackgroundImage();
 
         View root = binding.getRoot();
         return root;
@@ -71,8 +71,12 @@ public class LoginFragment extends Fragment {
         viewModel = null;
     }
 
-    private void initBackgroundImage() {
+    private void setBackgroundImage() {
         Glide.with(this).asGif().load(R.raw.login_background).into(binding.loginIvBackground);
+    }
+
+    private void setKeyboardListener(){
+
     }
 
     public void onRegisterClick(View v) {
