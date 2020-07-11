@@ -37,6 +37,7 @@ public class ReadPostFragment extends Fragment {
     private CommentListAdapter adapter;
     private FirebaseUser user;
     private boolean isMyPost = false;
+    private String postId;
 
     public ReadPostFragment() {
         // Required empty public constructor
@@ -83,6 +84,14 @@ public class ReadPostFragment extends Fragment {
         getList();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        adapter = null;
+        viewModel = null;
+    }
+
     private void observePostItem() {
         viewModel.getPostItemLiveData().observe(getViewLifecycleOwner(), new Observer<PostItem>() {
             @Override
@@ -97,22 +106,15 @@ public class ReadPostFragment extends Fragment {
                 }
                 binding.setUser(user.getDisplayName());
                 binding.setItem(postItem);
+                hiddeProgressBar();
             }
         });
     }
 
     private void loadPostItem() {
         Bundle bundle = getArguments();
-        String postId = bundle.getString("id");
+        postId = bundle.getString("id");
         viewModel.readPost(postId);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-        adapter = null;
-        viewModel = null;
     }
 
     private void getList() {
@@ -124,32 +126,40 @@ public class ReadPostFragment extends Fragment {
     }
 
     public void onRefreshClick(View v) {
-        viewModel.reloadPost();
+        viewModel.reloadPost(postId);
     }
 
     public void onDeleteClick(View v) {
-        viewModel.deletePost();
+        viewModel.deletePost(postId);
         ((MainActivity)getActivity()).setListFragmentStatusCode(Constants.LIST_FRAGMENT_STATUS.CHANGED);
         ((MainActivity) getActivity()).removeAndPop(this);
     }
 
     public void onEditClick(View v) {
-
+        ((MainActivity) getActivity()).replaceWithBackStack(AddPostFragment.newInstance(postId));
     }
 
     public void onSelectAClick(View v) {
         if (isMyPost) {
-            viewModel.select(Constants.SELECT.WRITER_A);
+            viewModel.select(Constants.SELECT.WRITER_A, postId);
         } else {
-            viewModel.select(Constants.SELECT.OTHER_A);
+            viewModel.select(Constants.SELECT.OTHER_A, postId);
         }
     }
 
     public void onSelectBClick(View v) {
         if (isMyPost) {
-            viewModel.select(Constants.SELECT.WRITER_B);
+            viewModel.select(Constants.SELECT.WRITER_B, postId);
         } else {
-            viewModel.select(Constants.SELECT.OTHER_B);
+            viewModel.select(Constants.SELECT.OTHER_B, postId);
         }
+    }
+
+    private void showProgressBar(){
+
+    }
+
+    private void hiddeProgressBar(){
+
     }
 }

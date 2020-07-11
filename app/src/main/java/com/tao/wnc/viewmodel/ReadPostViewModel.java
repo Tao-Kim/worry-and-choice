@@ -20,7 +20,6 @@ public class ReadPostViewModel extends ViewModel {
     private PostRepository postRepository;
     private FirebaseUser user;
     private Observer<PostItem> postItemObserver;
-    private String postId;
 
     public ReadPostViewModel() {
         commentItems = new ArrayList<>();
@@ -48,15 +47,14 @@ public class ReadPostViewModel extends ViewModel {
     }
 
     public void readPost(String postId) {
-        this.postId = postId;
         postRepository.readPost(postId, user.getDisplayName());
     }
 
-    public void reloadPost() {
+    public void reloadPost(String postId) {
         postRepository.readPost(postId, user.getDisplayName());
     }
 
-    public void deletePost() {
+    public void deletePost(String postId) {
         postRepository.deletePost(postId);
     }
 
@@ -64,13 +62,13 @@ public class ReadPostViewModel extends ViewModel {
 
     }
 
-    public void select(final short SELECT) {
+    public void select(final short SELECT, final String postId) {
         postRepository.modifySelect(SELECT, postId, user.getDisplayName());
         postRepository.getDoneLiveData().observeForever(new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean done) {
                 if(done){
-                    reloadPost();
+                    reloadPost(postId);
                     postRepository.getDoneLiveData().removeObserver(this);
                 }
             }

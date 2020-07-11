@@ -35,6 +35,10 @@ public class AddPostFragment extends Fragment {
         return new AddPostFragment();
     }
 
+    public static AddPostFragment newInstance(String postId){
+        return  new AddPostFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
