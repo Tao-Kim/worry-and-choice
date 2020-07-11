@@ -22,7 +22,7 @@ public class MyPostsViewModel extends ViewModel {
     private PostRepository postRepository;
     private MutableLiveData<ArrayList<PostItem>> myPostsListLiveData;
     private ArrayList<PostItem> myPostsList = new ArrayList<>();
-
+    private Observer<List<PostItem>> myPostsListObserver;
 
     public MyPostsViewModel() {
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -37,18 +37,19 @@ public class MyPostsViewModel extends ViewModel {
     }
 
     private void observeRepositoryMyPostsList() {
-        postRepository.getMyPostsListLiveData().observeForever(new Observer<List<PostItem>>() {
+        myPostsListObserver = new Observer<List<PostItem>>() {
             @Override
             public void onChanged(List<PostItem> postItems) {
                 if (postItems != null && postItems.size() != 0) {
-                    for(PostItem post : postItems){
+                    for (PostItem post : postItems) {
                         myPostsList.add(post);
                     }
                     myPostsListLiveData.setValue(myPostsList);
                 }
 
             }
-        });
+        };
+        postRepository.getMyPostsListLiveData().observeForever(myPostsListObserver);
     }
 
     public void renewalMyPostsList() {
@@ -56,5 +57,11 @@ public class MyPostsViewModel extends ViewModel {
             myPostsList.clear();
         }
         postRepository.readMyPostsList(user.getDisplayName());
+    }
+
+    @Override
+    protected void onCleared() {
+        postRepository.getMyPostsListLiveData().removeObserver(myPostsListObserver);
+        super.onCleared();
     }
 }

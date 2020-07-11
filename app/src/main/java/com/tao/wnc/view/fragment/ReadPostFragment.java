@@ -1,7 +1,6 @@
 package com.tao.wnc.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +18,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.tao.wnc.R;
 import com.tao.wnc.databinding.FragmentReadPostBinding;
+import com.tao.wnc.model.domain.CommentItem;
 import com.tao.wnc.model.domain.PostItem;
 import com.tao.wnc.util.Constants;
 import com.tao.wnc.view.activity.MainActivity;
 import com.tao.wnc.view.adapter.CommentListAdapter;
 import com.tao.wnc.viewmodel.ReadPostViewModel;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +37,7 @@ public class ReadPostFragment extends Fragment {
     private FragmentReadPostBinding binding;
     private ReadPostViewModel viewModel;
     private CommentListAdapter adapter;
+    private  RecyclerView recyclerView;
     private FirebaseUser user;
     private boolean isMyPost = false;
     private String postId;
@@ -62,12 +65,7 @@ public class ReadPostFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_read_post, container, false);
         binding.setFragment(this);
 
-        RecyclerView recyclerView = binding.rvReadPostComment;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        adapter = new CommentListAdapter();
-        recyclerView.setAdapter(adapter);
+        initRecyclerView();
 
         return binding.getRoot();
     }
@@ -79,9 +77,9 @@ public class ReadPostFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         observePostItem();
-        loadPostItem();
+        observeCommentList();
+        loadPost();
 
-        getList();
     }
 
     @Override
@@ -92,14 +90,19 @@ public class ReadPostFragment extends Fragment {
         viewModel = null;
     }
 
+    private void initRecyclerView(){
+        recyclerView = binding.rvReadPostComment;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+        adapter = new CommentListAdapter();
+        recyclerView.setAdapter(adapter);
+    }
+
     private void observePostItem() {
         viewModel.getPostItemLiveData().observe(getViewLifecycleOwner(), new Observer<PostItem>() {
             @Override
             public void onChanged(PostItem postItem) {
-
-
-                Log.d("test", Integer.toString(postItem.getMySelected()));
-
                 String writer = postItem.getWriter();
                 if (writer.equals(user.getDisplayName())) {
                     isMyPost = true;
@@ -111,15 +114,26 @@ public class ReadPostFragment extends Fragment {
         });
     }
 
-    private void loadPostItem() {
+    private void observeCommentList() {
+        viewModel.getCommentListLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<CommentItem>>() {
+            @Override
+            public void onChanged(ArrayList<CommentItem> commentItems) {
+                if(commentItems.size() != 0){
+                    adapter.setItems(commentItems);
+                    hiddeProgressBar();
+                }
+            }
+        });
+    }
+
+    private void loadPost() {
         Bundle bundle = getArguments();
         postId = bundle.getString("id");
         viewModel.readPost(postId);
+        viewModel.renewalCommentList(postId);
     }
 
-    private void getList() {
-        adapter.setItems(viewModel.getListItems());
-    }
+
 
     public void onBackClick(View v) {
         ((MainActivity) getActivity()).removeAndPop(this);
@@ -127,6 +141,7 @@ public class ReadPostFragment extends Fragment {
 
     public void onRefreshClick(View v) {
         viewModel.reloadPost(postId);
+        viewModel.renewalCommentList(postId);
     }
 
     public void onDeleteClick(View v) {
@@ -153,6 +168,12 @@ public class ReadPostFragment extends Fragment {
         } else {
             viewModel.select(Constants.SELECT.OTHER_B, postId);
         }
+    }
+
+    public void onCommentSendClick(View v){
+        viewModel.sendComment(postId, binding.edtReadPostComment.getText().toString());
+        viewModel.renewalCommentList(postId);
+        binding.edtReadPostComment.setText("");
     }
 
     private void showProgressBar(){

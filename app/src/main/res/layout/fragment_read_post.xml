@@ -349,6 +349,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_read_post_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/wncNone"
@@ -375,6 +376,7 @@
                 android:background="@drawable/bg_item45"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{fragment::onCommentSendClick}"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="7dp"
                 android:text="@string/ime_send"

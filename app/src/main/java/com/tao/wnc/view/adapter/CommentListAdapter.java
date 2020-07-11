@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListViewHolder> {
 
-    private ArrayList<CommentItem> items;
+    private ArrayList<CommentItem> items = new ArrayList<>();
 
     @NonNull
     @Override

@@ -3,11 +3,11 @@ package com.tao.wnc.model.domain;
 public class CommentItem {
     private String userName;
     private String message;
-    private String timeStamp;
+    private long timeStamp;
 
     public CommentItem(){}
 
-    public CommentItem(String userName, String message, String timeStamp) {
+    public CommentItem(String userName, String message, long timeStamp) {
         this.userName = userName;
         this.message = message;
         this.timeStamp = timeStamp;
@@ -29,11 +29,11 @@ public class CommentItem {
         this.message = message;
     }
 
-    public String getTimeStamp() {
+    public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
 }

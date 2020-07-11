@@ -221,6 +221,9 @@ public class PostRepository {
         }
     }
     public void readCommentList(String postId){
+        if(commentList.size() != 0){
+            commentList.clear();
+        }
         ref.child("posts").child(postId).child("comments").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

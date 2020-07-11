@@ -13,26 +13,34 @@ import com.tao.wnc.model.repository.PostRepository;
 import com.tao.wnc.util.SingleLiveEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReadPostViewModel extends ViewModel {
-    private ArrayList<CommentItem> commentItems;
+    private MutableLiveData<ArrayList<CommentItem>> commentListLiveData;
+    private ArrayList<CommentItem> commentList;
     private MutableLiveData<PostItem> postItemLiveData;
     private PostRepository postRepository;
     private FirebaseUser user;
     private Observer<PostItem> postItemObserver;
+    private Observer<Boolean> doneObserver;
+    private Observer<List<CommentItem>> commentListObserver;
 
     public ReadPostViewModel() {
-        commentItems = new ArrayList<>();
-        setTestDataSet();
-
+        commentListLiveData = new MutableLiveData<>();
+        commentList = new ArrayList<>();
         postRepository = new PostRepository();
         postItemLiveData = new SingleLiveEvent<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
         observePostItem();
+        observeCommentList();
     }
 
     public MutableLiveData<PostItem> getPostItemLiveData() {
         return postItemLiveData;
+    }
+
+    public MutableLiveData<ArrayList<CommentItem>> getCommentListLiveData() {
+        return commentListLiveData;
     }
 
     private void observePostItem() {
@@ -46,11 +54,22 @@ public class ReadPostViewModel extends ViewModel {
         postRepository.getPostItemLiveData().observeForever(postItemObserver);
     }
 
-    public void readPost(String postId) {
-        postRepository.readPost(postId, user.getDisplayName());
+    private void observeCommentList() {
+        commentListObserver = new Observer<List<CommentItem>>() {
+            @Override
+            public void onChanged(List<CommentItem> commentItems) {
+                if(commentItems != null && commentItems.size() != 0){
+                    for(CommentItem commentItem : commentItems){
+                        commentList.add(commentItem);
+                    }
+                    commentListLiveData.setValue(commentList);
+                }
+            }
+        };
+        postRepository.getCommentListLiveData().observeForever(commentListObserver);
     }
 
-    public void reloadPost(String postId) {
+    public void readPost(String postId) {
         postRepository.readPost(postId, user.getDisplayName());
     }
 
@@ -58,66 +77,40 @@ public class ReadPostViewModel extends ViewModel {
         postRepository.deletePost(postId);
     }
 
-    public void editPost(){
-
-    }
-
     public void select(final short SELECT, final String postId) {
         postRepository.modifySelect(SELECT, postId, user.getDisplayName());
-        postRepository.getDoneLiveData().observeForever(new Observer<Boolean>() {
+        doneObserver = new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean done) {
-                if(done){
+                if (done) {
                     reloadPost(postId);
                     postRepository.getDoneLiveData().removeObserver(this);
                 }
             }
-        });
+        };
+        postRepository.getDoneLiveData().observeForever(doneObserver);
     }
 
-    public ArrayList<CommentItem> getListItems() {
-
-        return commentItems;
+    public void sendComment(String postId, String commentMessage){
+        CommentItem commentItem = new CommentItem(user.getDisplayName(), commentMessage, System.currentTimeMillis());
+        postRepository.insertComment(postId, commentItem);
     }
 
-    private void setTestDataSet() {
+    public void reloadPost(String postId) {
+        postRepository.readPost(postId, user.getDisplayName());
+    }
 
-        CommentItem item = new CommentItem("길동이",
-                "피시방 알바 좋아요!!!",
-                "2시간전");
-        commentItems.add(item);
-        CommentItem item2 = new CommentItem("호동이",
-                "편의점 알바 좋아요!!!",
-                "3시간전");
-        commentItems.add(item2);
-        CommentItem item3 = new CommentItem("타오",
-                "둘다 좋아요!!!",
-                "4시간전");
-        commentItems.add(item3);
-        CommentItem item4 = new CommentItem("TEST",
-                "test",
-                "0시간전");
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-        commentItems.add(item4);
-
-
+    public void renewalCommentList(String postId) {
+        if (commentList.size() != 0) {
+            commentList.clear();
+        }
+        postRepository.readCommentList(postId);
     }
 
     @Override
     protected void onCleared() {
         postRepository.getPostItemLiveData().removeObserver(postItemObserver);
+        postRepository.getDoneLiveData().removeObserver(doneObserver);
         super.onCleared();
     }
 }
