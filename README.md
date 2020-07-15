@@ -17,8 +17,8 @@ ____
 * [Firebase-cloudMessaging]() 현재 토큰만 구현
 
 * [glide](https://github.com/bumptech/glide)
-* [recyclerview-animators] (https://github.com/wasabeef/recyclerview-animators)
-* [smart-show] (https://github.com/opensource-zhuzhiqiang/smart-show)
+* [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators)
+* [smart-show](https://github.com/opensource-zhuzhiqiang/smart-show)
 ----
 #### APK
 * [0.0.1_beta](https://github.com/Tao-Kim/worry-and-choice/blob/master/apk/0.0.1_beta.apk)
