@@ -1,4 +1,4 @@
-# , 그리고 선택
+# 고민, 그리고 선택
 * Version : 0.0.1_beta
 * minSDK : 16
 * targetSDK : 29
